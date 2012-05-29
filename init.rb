@@ -17,13 +17,13 @@ Redmine::Plugin.register :redmine_hr do
   menu :application_menu, :hr_statuses, 
     {:controller => :hr_statuses, :action => :index}, 
     :caption => :label_hr_statuses, 
-    :if => Proc.new{ User.is_hr? }    
+    :if => Proc.new{ User.current.is_hr? }    
   menu :application_menu, :hr_jobs, 
     {:controller => :hr_jobs, :action => :index}, 
     :caption => :label_hr_jobs, 
-    :if => Proc.new{ User.is_hr? }
+    :if => Proc.new{ User.current.is_hr? }
   menu :application_menu, :hr_candidates, 
     {:controller => :hr_candidates, :action => :index}, 
     :caption => :label_hr_candidates, 
-    :if => Proc.new{ User.is_hr? }
+    :if => Proc.new{ User.current.is_hr? }
 end
