@@ -11,6 +11,3 @@
 
   cd vendor/plugins/redmine_hr
   git pull
-  cd ../..
-  rake db:migrate_plugins RAILS_ENV=production  
-  
