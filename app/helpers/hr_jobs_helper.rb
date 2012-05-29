@@ -1,0 +1,2 @@
+module HrJobsHelper
+end

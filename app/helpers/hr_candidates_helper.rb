@@ -1,0 +1,2 @@
+module HrCandidatesHelper
+end
