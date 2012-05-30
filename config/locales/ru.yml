@@ -1,0 +1,5 @@
+# Russian strings go here for Rails i18n
+ru:
+  label_hr_statuses: "Статусы рассмотрения"
+  label_hr_jobs: "Вакансии"
+  label_hr_candidates: "Кандидаты"

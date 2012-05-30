@@ -1,3 +1,5 @@
 # English strings go here for Rails i18n
 en:
-  my_label: "My label"
+  label_hr_statuses: "Approval statuses"
+  label_hr_jobs: "Jobs"
+  label_hr_candidates: "Candidates"
