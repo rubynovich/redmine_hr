@@ -4,7 +4,7 @@ class HrJobsController < ApplicationController
 
   # GET /hr_jobs/
   def index
-    @hr_job_pages, @hr_jobs = paginate :hr_jobs, :per_page => 25, :order => "position"
+    @hr_job_pages, @hr_jobs = paginate :hr_jobs, :per_page => 25, :order => "name"
     render :action => "index", :layout => false if request.xhr?
   end
 

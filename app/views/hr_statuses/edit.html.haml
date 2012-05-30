@@ -1,0 +1,9 @@
+%h2
+  = link_to l(:label_hr_status_plural), hr_statuses_path
+  &#187; 
+  =h @hr_status
+
+- labelled_form_for @hr_status do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  = submit_tag l(:button_save)
+

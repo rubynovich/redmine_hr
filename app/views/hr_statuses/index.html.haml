@@ -1,0 +1,26 @@
+.contextual
+  = link_to l(:label_hr_status_new), new_hr_status_path, :class => 'icon icon-add'
+
+%h2=l(:label_hr_status_plural)
+
+%table.list
+  %thead
+    %tr
+      %th=l(:field_hr_status)
+      %th=l(:field_is_default)
+      %th=l(:field_is_closed)      
+      %th=l(:button_sort)
+      %th
+  %tbody
+    - for hr_status in @hr_statuses
+      %tr{:class=>cycle("odd", "even")}
+        %td= link_to h(hr_status.name), edit_hr_status_path(hr_status)
+        %td{:align=>"center"}= checked_image hr_status.is_default?
+        %td{:align=>"center"}= checked_image hr_status.is_closed?        
+        %td{:align=>"center", :style=>"width:15%;"}= reorder_links('hr_status', {:action => 'update', :id => hr_status}, :put)
+        %td.buttons
+          = link_to(l(:button_delete), hr_status_path(hr_status), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+
+%p.pagination= pagination_links_full @hr_status_pages
+
+- html_title(l(:label_hr_status_plural))

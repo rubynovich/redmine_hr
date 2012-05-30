@@ -1,0 +1,20 @@
+.contextual
+  = link_to l(:label_hr_job_new), new_hr_job_path, :class => 'icon icon-add'
+
+%h2=l(:label_hr_job_plural)
+
+%table.list
+  %thead
+    %tr
+      %th=l(:field_hr_job)
+      %th
+  %tbody
+    - for hr_job in @hr_jobs
+      %tr{:class=>cycle("odd", "even")}
+        %td= link_to h(hr_job.name), edit_hr_job_path(hr_job)
+        %td.buttons
+          = link_to(l(:button_delete), hr_job_path(hr_job), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+
+%p.pagination= pagination_links_full @hr_job_pages
+
+- html_title(l(:label_hr_job_plural))
