@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_hr do
   name 'Redmine HR plugin'
   author 'Roman Shipiev'
   description 'Redmine plugin for HR-managers'
-  version '0.0.1'
+  version '0.0.2'
   url 'http://github.com/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'
 
@@ -26,4 +26,7 @@ Redmine::Plugin.register :redmine_hr do
     {:controller => :hr_jobs, :action => :index},
     :caption => :label_hr_job_plural, 
     :if => Proc.new{ User.current.is_hr? }
+    
+  menu :admin_menu, :hr_members, 
+    {:controller => :hr_members, :action => :index}, :caption => :label_hr_member_plural, :html => {:class => :users}
 end

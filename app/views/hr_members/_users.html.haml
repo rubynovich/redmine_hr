@@ -1,0 +1,30 @@
+.splitcontentleft
+  - if @hr_members.any?
+    %table.list.users
+      %thead
+        %tr
+          %th= l(:label_user)
+          %th{:style=>"width:15%"}
+      %tbody
+        - @hr_members.sort_by{ |m| m.user }.each do |member|
+          %tr{:id=>"user-#{member.user_id}", :class => cycle('odd', 'even')}
+            %td.user
+              = link_to_user member.user
+            %td.buttons
+              = link_to l(:button_delete), hr_member_path(member), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+  - else
+    %p.nodata
+      = l(:label_no_data)
+
+.splitcontentright
+  - users = User.not_hr.all
+  - if users.any?
+    - form_for :hr_member do |f|
+      %fieldset
+        %legend
+          =l(:label_user_new)
+        #users
+          = principals_check_box_tags 'user_ids[]', users
+
+      %p= submit_tag l(:button_add)  
+
