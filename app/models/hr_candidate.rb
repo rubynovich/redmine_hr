@@ -3,11 +3,11 @@ class HrCandidate < ActiveRecord::Base
   
   validates_presence_of :name, :scope => :birth_date
   validates_uniqueness_of :name
+  validates_presence_of :hr_job_id
+  validates_presence_of :hr_status_id  
   
-  belongs_to :job
-  belongs_to :status
-
-#  default :order => :name
+  belongs_to :hr_job
+  belongs_to :hr_status
 
   def to_s
     name

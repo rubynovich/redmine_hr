@@ -19,6 +19,7 @@
         %td{:align=>"center"}= checked_image hr_status.is_closed?        
         %td{:align=>"center", :style=>"width:15%;"}= reorder_links('hr_status', {:action => 'update', :id => hr_status}, :put)
         %td.buttons
+          = link_to l(:button_update), {:action => 'edit', :id => hr_status.id}, :class => 'icon icon-edit'
           = link_to(l(:button_delete), hr_status_path(hr_status), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
 %p.pagination= pagination_links_full @hr_status_pages

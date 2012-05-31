@@ -14,16 +14,16 @@ Redmine::Plugin.register :redmine_hr do
   url 'http://github.com/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'
 
+  menu :application_menu, :hr_candidates, 
+    {:controller => :hr_candidates, :action => :index},
+    :caption => :label_hr_candidate_plural, 
+    :if => Proc.new{ User.current.is_hr? }
   menu :application_menu, :hr_statuses, 
     {:controller => :hr_statuses, :action => :index}, 
-    :caption => :label_hr_statuse_plural, 
+    :caption => :label_hr_status_plural, 
     :if => Proc.new{ User.current.is_hr? }
   menu :application_menu, :hr_jobs, 
     {:controller => :hr_jobs, :action => :index},
     :caption => :label_hr_job_plural, 
-    :if => Proc.new{ User.current.is_hr? }
-  menu :application_menu, :hr_candidates, 
-    {:controller => :hr_candidates, :action => :index},
-    :caption => :label_hr_candidate_plural, 
     :if => Proc.new{ User.current.is_hr? }
 end

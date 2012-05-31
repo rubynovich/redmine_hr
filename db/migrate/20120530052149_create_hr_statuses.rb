@@ -4,7 +4,7 @@ class CreateHrStatuses < ActiveRecord::Migration
       t.column :name, :string, :default => "", :limit => 30
       t.column :is_closed, :boolean, :default => false, :null => false
       t.column :is_default, :boolean, :default => false, :null => false
-      t.column :position, :integer, :default => 1, :null => false      
+      t.column :position, :integer, :default => 1
     end
   end
 

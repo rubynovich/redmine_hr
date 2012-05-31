@@ -1,16 +1,22 @@
 # Russian strings go here for Rails i18n
 ru:
+  label_hr_status: "Статус рассмотрения"
   label_hr_status_plural: "Статусы рассмотрения"
   label_hr_status_new: "Добавить новый статус"
   label_new_hr_status: "Новый статус рассмотрения"
-  
+  label_edit_hr_status: "Правка статуса рассмотрения"
+
+  label_hr_job: "Вакансия"
   label_hr_job_plural: "Вакансии"
+  label_hr_job_new: "Добавить вакансию"  
   label_new_hr_job: "Новая вакансия"
-  label_hr_job_new: "Добавить вакансию"
-  
+  label_edit_hr_job: "Правка вакансии"  
+
+  label_hr_candidate: "Кандидат"
   label_hr_candidate_plural: "Кандидаты"
-  label_new_hr_candidate: "Новый кандидат"
   label_hr_candidate_new: "Добавить кандидата"
+  label_new_hr_candidate: "Новый кандидат"
+  label_edit_hr_candidate: "Изменение данных кандидата"
   
   field_phone: "Контактный телефон"
   field_birth_date: "День рождения"

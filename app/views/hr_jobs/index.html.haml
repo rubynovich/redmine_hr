@@ -13,6 +13,7 @@
       %tr{:class=>cycle("odd", "even")}
         %td= link_to h(hr_job.name), hr_job_path(hr_job)
         %td.buttons
+          = link_to l(:button_update), {:action => 'edit', :id => hr_job.id}, :class => 'icon icon-edit'        
           = link_to(l(:button_delete), hr_job_path(hr_job), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
 %p.pagination= pagination_links_full @hr_job_pages

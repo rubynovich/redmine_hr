@@ -4,13 +4,13 @@ class HrCandidatesController < ApplicationController
 
   # GET /hr_candidates/
   def index
-    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date"
+    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC"
     render :action => "index", :layout => false if request.xhr?
   end
 
   # GET /hr_candidates/new
   def new
-    @hr_candidate = HrCandidate.new
+    @hr_candidate = HrCandidate.new(:hr_status => HrStatus.default)
   end
   
   # POST /hr_candidates
@@ -26,6 +26,11 @@ class HrCandidatesController < ApplicationController
 
   # GET /hr_candidates/1/edit
   def edit
+    @hr_candidate = HrCandidate.find(params[:id])
+  end
+
+  # GET /hr_candidates/1
+  def show
     @hr_candidate = HrCandidate.find(params[:id])
   end
 

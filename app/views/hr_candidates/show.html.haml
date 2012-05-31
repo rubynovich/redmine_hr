@@ -1,0 +1,33 @@
+.contextual
+  = link_to l(:button_add), {:action => 'new'}, :class => 'icon icon-add'
+  = link_to l(:button_update), {:action => 'edit', :id => @hr_candidate.id}, :class => 'icon icon-edit'
+  = link_to l(:button_delete), hr_candidate_path(@hr_candidate), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+
+%h2
+  = l(:label_hr_candidate)
+  = h(@hr_candidate.name)
+
+.issue.details
+  %table.attributes
+    %tr
+      %th.name= l(:field_name)+":"
+      %td.name= h(@hr_candidate.name)
+      %th.hr_job= l(:field_hr_job)+":"
+      %td.hr_job= link_to h(@hr_candidate.hr_job), hr_job_path(@hr_candidate.hr_job)
+    %tr    
+      %th.phone= l(:field_phone)+":"
+      %td.phone= h(@hr_candidate.phone)
+      %th.hr_status= l(:field_hr_status)+":"
+      %td.hr_status= link_to h(@hr_candidate.hr_status), hr_status_path(@hr_candidate.hr_status)
+    %tr
+      %th.birth_date= l(:field_birth_date)+":"
+      %td.birth_date= format_date(@hr_candidate.birth_date)
+      %th.due_date= l(:field_due_date)+":"
+      %td.due_date= format_date(@hr_candidate.due_date)
+  %hr
+    %p
+      %strong= l(:field_to_do)
+    .wiki= textilizable @hr_candidate, :to_do
+    %p
+      %strong= l(:field_done)
+    .wiki= textilizable @hr_candidate, :done

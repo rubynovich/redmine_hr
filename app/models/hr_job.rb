@@ -17,7 +17,11 @@ class HrJob < ActiveRecord::Base
   end
   
   private
+    def deletable?
+      HrCandidate.find(:first, :conditions => ["hr_status_id=?", self.id])
+    end
+  
     def check_integrity
-#      raise "Can't delete hr_status" if HrCandidate.find(:first, :conditions => ["hr_status_id=?", self.id])
+      raise "Can't delete hr_status" unless deletable?
     end    
 end

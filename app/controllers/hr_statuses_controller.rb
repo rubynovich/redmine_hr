@@ -29,6 +29,13 @@ class HrStatusesController < ApplicationController
   def edit
     @hr_status = HrStatus.find(params[:id])
   end
+  
+  # GET /hr_statuses/1
+  def show
+    @hr_status = HrStatus.find(params[:id])
+    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC", :conditions => ["hr_status_id=?", @hr_status.id]
+  end  
+  
 
   # POST /hr_statuses
   def create

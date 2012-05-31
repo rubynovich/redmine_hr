@@ -1,7 +1,11 @@
 .contextual
-  = link_to l(:label_hr_candidate_new), new_hr_candidate_path, :class => 'icon icon-add'
+  = link_to l(:button_add), {:action => 'new'}, :class => 'icon icon-add'
+  = link_to l(:button_update), {:action => 'edit', :id => @hr_job.id}, :class => 'icon icon-edit'
+  = link_to l(:button_delete), hr_job_path(@hr_job), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
 
-%h2=l(:label_hr_candidate_plural)
+%h2
+  = l(:label_hr_job)
+  = h(@hr_job.name)
 
 %table.list
   %thead
@@ -9,7 +13,6 @@
       %th=l(:field_hr_candidate)
       %th=l(:field_birth_date)
       %th=l(:field_phone)
-      %th=l(:field_hr_job)
       %th=l(:field_hr_status)
       %th=l(:field_due_date)
       %th
@@ -19,7 +22,6 @@
         %td= link_to h(hr_candidate.name), hr_candidate_path(hr_candidate)
         %td{:align=>"center"}= format_date(hr_candidate.birth_date)
         %td{:align=>"center"}= h(hr_candidate.phone)
-        %td{:align=>"center"}= link_to h(hr_candidate.hr_job), hr_job_path(hr_candidate.hr_job)
         %td{:align=>"center"}= link_to h(hr_candidate.hr_status), hr_status_path(hr_candidate.hr_status)
         %td{:align=>"center"}= format_date(hr_candidate.due_date)
         %td.buttons
