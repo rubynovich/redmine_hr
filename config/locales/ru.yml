@@ -22,7 +22,7 @@ ru:
   label_edit_hr_candidate: "Изменение данных кандидата"
   
   field_phone: "Контактный телефон"
-  field_birth_date: "День рождения"
+  field_birth_date: "Дата рождения"
   field_to_do: "Необходимо выполнить"
   field_done: "Уже выполнено"
   field_hr_candidate: "Кандидат"
