@@ -1,0 +1,30 @@
+.contextual
+  = link_to l(:label_hr_candidate_new), new_hr_candidate_path, :class => 'icon icon-add'
+
+%h2=l(:label_hr_candidate_plural)
+
+%table.list
+  %thead
+    %tr
+      %th=l(:field_hr_candidate)
+      %th=l(:field_birth_date)
+      %th=l(:field_phone)
+      %th=l(:field_hr_job)
+      %th=l(:field_hr_status)
+      %th=l(:field_due_date)
+      %th
+  %tbody
+    - for hr_candidate in @hr_candidates
+      %tr{:class=>cycle("odd", "even")}
+        %td= link_to h(hr_candidate.name), edit_hr_candidate_path(hr_candidate)
+        %td= format_date(hr_candidate.birth_date)
+        %td= h(hr_candidate.phone)
+        %td= link_to h(hr_candidate.hr_job), hr_job_path(hr_job)
+        %td= link_to h(hr_candidate.hr_status), hr_status_path(hr_status)
+        %td= format_date(hr_candidate.due_date)
+        %td.buttons
+          = link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+
+%p.pagination= pagination_links_full @hr_candidate_pages
+
+- html_title(l(:label_hr_status_plural))
