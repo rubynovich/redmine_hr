@@ -25,6 +25,10 @@ ru:
   field_birth_date: "Дата рождения"
   field_to_do: "Необходимо выполнить"
   field_done: "Уже выполнено"
-  field_hr_candidate: "Кандидат"
+  field_hr_candidate_fullname: "ФИО кандидата"
   field_hr_job: "Вакансия"
   field_hr_status: "Статус рассмотрения"
+  
+  error_unable_delete_hr_candidate: "Удаление кандидата невозможно"
+  error_unable_delete_hr_job: "Удалени вакансии невозможно"
+  error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"

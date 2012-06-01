@@ -1,7 +1,7 @@
 = error_messages_for @hr_candidate
 .box.tabular
   .splitcontentleft
-    %p= f.text_field :name, :required => true, :size => 40
+    %p= f.text_field :name, :required => true, :size => 40, :label => false
     %p= f.text_field :phone, :size => 20
     %p
       = f.text_field :birth_date, :size => 10

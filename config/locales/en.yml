@@ -1,5 +1,33 @@
 # English strings go here for Rails i18n
 en:
-  label_hr_statuses: "Approval statuses"
-  label_hr_jobs: "Jobs"
-  label_hr_candidates: "Candidates"
+  label_hr_member_plural: "HR-managers"
+  
+  label_hr_status: "Approval status"
+  label_hr_status_plural: "Approval statuses"
+  label_hr_status_new: "Add new Approval Status"
+  label_new_hr_status: "New Approval Status"
+  label_edit_hr_status: "Edit Approval Status"
+
+  label_hr_job: "Job"
+  label_hr_job_plural: "Jobs"
+  label_hr_job_new: "Add Job"
+  label_new_hr_job: "New Job"
+  label_edit_hr_job: "Edit Job"
+
+  label_hr_candidate: "Candidate"
+  label_hr_candidate_plural: "Candidates"
+  label_hr_candidate_new: "Add Candidate"
+  label_new_hr_candidate: "New Candidate"
+  label_edit_hr_candidate: "Edit Candidate Information"
+  
+  field_phone: "Telephone Number"
+  field_birth_date: "Birth Date"
+  field_to_do: "ToDo"
+  field_done: "Done"
+  field_hr_candidate_fullname: "Candidate Fullname"
+  field_hr_job: "Job"
+  field_hr_status: "Approval Status"
+  
+  error_unable_delete_hr_candidate: "Unable delete the Candidate"
+  error_unable_delete_hr_job: "Unable delete the Job"
+  error_unable_delete_hr_status: "Unable delete the Approval Status" 

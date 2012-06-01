@@ -10,7 +10,7 @@
 .issue.details
   %table.attributes
     %tr
-      %th.name= l(:field_name)+":"
+      %th.name= l(:field_hr_candidate_fullname)+":"
       %td.name= h(@hr_candidate.name)
       %th.hr_job= l(:field_hr_job)+":"
       %td.hr_job= link_to h(@hr_candidate.hr_job), hr_job_path(@hr_candidate.hr_job)
