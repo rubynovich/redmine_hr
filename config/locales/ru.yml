@@ -2,7 +2,6 @@
 ru:
   label_hr_member_plural: "HR-менеджеры"
   
-
   label_hr_status: "Статус рассмотрения"
   label_hr_status_plural: "Статусы рассмотрения"
   label_hr_status_new: "Добавить новый статус"
@@ -30,5 +29,5 @@ ru:
   field_hr_status: "Статус рассмотрения"
   
   error_unable_delete_hr_candidate: "Удаление кандидата невозможно"
-  error_unable_delete_hr_job: "Удалени вакансии невозможно"
+  error_unable_delete_hr_job: "Удаление вакансии невозможно"
   error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"
