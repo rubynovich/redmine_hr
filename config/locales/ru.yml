@@ -31,3 +31,6 @@ ru:
   error_unable_delete_hr_candidate: "Удаление кандидата невозможно"
   error_unable_delete_hr_job: "Удаление вакансии невозможно"
   error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"
+  
+  message_incorrect_format_phone: "задан неверно. Он должен состоять только из 10 цифр"
+  

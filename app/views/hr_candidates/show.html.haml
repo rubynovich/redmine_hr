@@ -26,8 +26,5 @@
       %td.due_date= format_date(@hr_candidate.due_date)
   %hr
     %p
-      %strong= l(:field_to_do)
-    .wiki= textilizable @hr_candidate, :to_do
-    %p
-      %strong= l(:field_done)
-    .wiki= textilizable @hr_candidate, :done
+      %strong= l(:field_description)
+    .wiki= textilizable @hr_candidate, :description

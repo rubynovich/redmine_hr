@@ -4,20 +4,18 @@
     %p= f.text_field :name, :required => true, :size => 40, :label => false
     %p= f.text_field :phone, :size => 20
     %p
-      = f.text_field :birth_date, :size => 10
+      = f.text_field :birth_date, :size => 10, :required => true
       = calendar_for('hr_candidate_birth_date')
     
   .splitcontentright
     %p= f.select :hr_job_id, HrJob.all.map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
     %p= f.select :hr_status_id, HrStatus.all(:order => "position").map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)    
     %p
-      = f.text_field :due_date, :size => 10
+      = f.text_field :due_date, :size => 10, :required => true
       = calendar_for('hr_candidate_due_date')
 
   %div{:style=>"clear:both"}
 
-  %p= f.text_area :to_do, :cols => 60, :rows => 15, :class => 'wiki-edit'
-  %p= f.text_area :done, :cols => 60, :rows => 15, :class => 'wiki-edit'
+  %p= f.text_area :description, :cols => 60, :rows => 15, :class => 'wiki-edit'
 
-= wikitoolbar_for 'hr_candidate_to_do'
-= wikitoolbar_for 'hr_candidate_done'
+= wikitoolbar_for 'hr_candidate_description'

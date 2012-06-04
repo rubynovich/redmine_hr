@@ -10,7 +10,7 @@ class HrCandidatesController < ApplicationController
 
   # GET /hr_candidates/new
   def new
-    @hr_candidate = HrCandidate.new(:hr_status => HrStatus.default)
+    @hr_candidate = HrCandidate.new(:hr_status => HrStatus.default, :author_id =>  User.current.id)
   end
   
   # POST /hr_candidates
