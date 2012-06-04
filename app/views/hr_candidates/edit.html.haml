@@ -4,7 +4,7 @@
   = render :partial => 'form', :locals => { :f => f }
   %fieldset
     %legend= l(:field_notes)
-    %p= text_area_tag :notes, @hr_candidate, :cols => 60, :rows => 15, :class => 'wiki-edit'
+    %p= text_area_tag :notes, @hr_candidate.notes, :cols => 60, :rows => 15, :class => 'wiki-edit'
   = wikitoolbar_for 'notes'
   = submit_tag l(:button_save)
 
