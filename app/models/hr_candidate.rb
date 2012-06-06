@@ -15,8 +15,6 @@ class HrCandidate < ActiveRecord::Base
   
   after_update :save_hr_change
   
-  attr_accessor :notes
-
   def to_s
     name
   end
