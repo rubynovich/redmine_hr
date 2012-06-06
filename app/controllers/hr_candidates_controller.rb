@@ -2,10 +2,36 @@ class HrCandidatesController < ApplicationController
   unloadable
   before_filter :require_hr
 
+  helper :sort
+  include SortHelper
+
   # GET /hr_candidates/
   def index
-    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC"
-    render :action => "index", :layout => false if request.xhr?
+    sort_init 'due_date', 'desc'
+    sort_update %w(name birth_date phone hr_status_id hr_job_id)
+    
+    @limit = per_page_option
+    
+    scope = HrCandidate.
+      like_name(params[:name]).
+      like_phone(params[:phone]).
+      eql_hr_job_id(params[:hr_job_id]).
+      eql_hr_status_id(params[:hr_status_id]).
+      eql_birth_date(params[:birth_date]).
+      eql_due_date(params[:due_date])
+    
+    @hr_candidate_count = scope.count
+    @hr_candidate_pages = Paginator.new self, @hr_candidate_count, @limit, params[:page]
+    @offset ||= @hr_candidate_pages.current.offset
+    @hr_candidates =  scope.find  :all,
+                                  :order => sort_clause,
+                                  :limit  =>  @limit,
+                                  :offset =>  @offset
+    
+    
+    
+#    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC"
+#    render :action => "index", :layout => false if request.xhr?
   end
 
   # GET /hr_candidates/new

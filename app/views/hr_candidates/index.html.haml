@@ -3,6 +3,53 @@
 
 %h2=l(:label_hr_candidate_plural)
 
+- form_tag({}, :method => :get) do
+  %fieldset
+    %legend= l(:label_filter_plural)
+    
+    %label{:for=>'name'}= l(:field_hr_candidate_fullname) + ":"
+    = text_field_tag 'name', params[:name], :size => 30
+    
+    %label{:for=>'phone'}= l(:field_phone) + ":"
+    = text_field_tag 'phone', params[:phone], :size => 10
+
+    %label{:for=>'birth_date'}= l(:field_birth_date) + ":"
+    = text_field_tag :birth_date, params[:birth_date], :size => 10, :onchange => "this.form.submit(); return false;"
+    = calendar_for('birth_date')
+ 
+    %br    
+    
+    %label{:for=>'hr_job_id'}= l(:field_hr_job) + ":"
+    %select{:id => 'hr_job_id', :name => 'hr_job_id', :class => "small", :onchange => "this.form.submit(); return false;"}
+      %option
+      - HrJob.all(:order => :name).each do |hr_job|
+        - if params[:hr_job_id].to_i == hr_job.id
+          %option{:value => hr_job.id, :selected => "selected"}
+            = hr_job.name
+        - else
+          %option{:value => hr_job.id}
+            = hr_job.name
+            
+    %label{:for=>'hr_status_id'}= l(:field_hr_status) + ":"
+    %select{:id => 'hr_status_id', :name => 'hr_status_id', :class => "small", :onchange => "this.form.submit(); return false;"}
+      %option
+      - HrStatus.all(:order => :position).each do |hr_status|
+        - if params[:hr_status_id].to_i == hr_status.id
+          %option{:value => hr_status.id, :selected => "selected"}
+            = hr_status.name
+        - else
+          %option{:value => hr_status.id}
+            = hr_status.name
+
+    %label{:for=>'due_date'}= l(:field_due_date) + ":"
+    = text_field_tag :due_date, params[:due_date], :size => 10, :onchange => "this.form.submit(); return false;"
+    = calendar_for('due_date')
+   
+    = submit_tag l(:button_apply), :class => "small", :name => nil
+    = link_to l(:button_clear), users_path, :class => 'icon icon-reload'
+
+&nbsp;
+
 %table.list
   %thead
     %tr
@@ -17,15 +64,15 @@
     - for hr_candidate in @hr_candidates
       %tr{:class=>cycle("odd", "even")}
         %td= link_to h(hr_candidate.name), hr_candidate_path(hr_candidate)
-        %td{:align=>"center"}= format_date(hr_candidate.birth_date)
-        %td{:align=>"center"}= h(hr_candidate.phone)
-        %td{:align=>"center"}= link_to h(hr_candidate.hr_job), hr_job_path(hr_candidate.hr_job)
-        %td{:align=>"center"}= link_to h(hr_candidate.hr_status), hr_status_path(hr_candidate.hr_status)
-        %td{:align=>"center"}= format_date(hr_candidate.due_date)
+        %td{:align=>"center"}= link_to(format_date(hr_candidate.birth_date), :birth_date => hr_candidate.birth_date)
+        %td{:align=>"center"}= link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
+        %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
+        %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
+        %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
         %td.buttons
           = link_to l(:button_update), {:action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'
           = link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
-%p.pagination= pagination_links_full @hr_candidate_pages
+%p.pagination= pagination_links_full @hr_candidate_pages, @hr_candidate_count
 
 - html_title(l(:label_hr_status_plural))

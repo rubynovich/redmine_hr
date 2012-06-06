@@ -14,6 +14,46 @@ class HrCandidate < ActiveRecord::Base
   has_many :hr_changes
   
   after_update :save_hr_change
+
+  named_scope :like_name, lambda {|q|
+    if q.present?
+      {:conditions => 
+        ["LOWER(name) LIKE :p OR name LIKE :p", 
+        {:p => "%#{q.to_s.downcase}%"}]}
+    end
+  }
+  
+  named_scope :like_phone, lambda {|q|
+    if q.present?
+      {:conditions => 
+        ["phone LIKE :p", 
+        {:p => "%#{q.to_s.downcase}%"}]}
+    end
+  }
+
+  named_scope :eql_hr_job_id, lambda {|q|
+    if q.present?
+      {:conditions => {:hr_job_id => q}}
+    end
+  }
+  
+  named_scope :eql_hr_status_id, lambda {|q|
+    if q.present?
+      {:conditions => {:hr_status_id => q}}
+    end
+  }
+  
+  named_scope :eql_due_date, lambda {|q|
+    if q.present?
+      {:conditions => {:due_date => q}}
+    end
+  }
+
+  named_scope :eql_birth_date, lambda {|q|
+    if q.present?
+      {:conditions => {:birth_date => q}}
+    end
+  }
   
   def to_s
     name
