@@ -11,6 +11,9 @@ class HrCandidate < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'    
   belongs_to :hr_job
   belongs_to :hr_status
+  has_many :hr_changes
+  
+  after_update :save_hr_change
   
   attr_accessor :notes
 
@@ -26,5 +29,32 @@ class HrCandidate < ActiveRecord::Base
     if self.due_date and self.due_date < Date.today
       errors.add :due_date, :invalid      
     end
+  end
+  
+  def init_hr_change(notes)
+    @current_hr_change ||= HrChange.new(:hr_candidate_id => self.id, :user => User.current, :notes => notes)
+    @attributes_before_change = attributes.dup
+    # Make sure updated_on is updated when adding a note.
+    updated_on_will_change!
+    @current_hr_change
+  end
+  
+  def save_hr_change
+    if @current_hr_change
+      # attributes changes
+      if @attributes_before_change
+        (HrCandidate.column_names - %w(id description author_id created_on updated_on)).each do |c|
+          before = @attributes_before_change[c]
+          after = send(c)
+          next if before == after || (before.blank? && after.blank?)
+          @current_hr_change.hr_change_details << HrChangeDetail.new(
+            :property => 'attr',
+            :prop_key => c,
+            :old_value => before,
+            :value => after)
+        end
+      end
+      @current_hr_change.save
+    end  
   end
 end

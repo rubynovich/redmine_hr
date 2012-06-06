@@ -1,0 +1,13 @@
+- for hr_change in hr_changes
+  %div{:id=>"change-#{ hr_change.id }", :class=> hr_change.css_classes}
+    %h4
+      = avatar(hr_change.user, :size => "24")
+      = authoring hr_change.created_on, hr_change.user, :label => :label_updated_time_by
+
+    - if hr_change.hr_change_details.any?
+      %ul.details
+        - details_to_strings(hr_change.hr_change_details).each do |string|
+          %li= string
+          
+    - unless hr_change.notes.blank?
+      .wiki= textilizable hr_change, :notes

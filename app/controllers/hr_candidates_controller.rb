@@ -32,6 +32,7 @@ class HrCandidatesController < ApplicationController
   # GET /hr_candidates/1
   def show
     @hr_candidate = HrCandidate.find(params[:id])
+    @hr_changes = @hr_candidate.hr_changes.find(:all, :order => "created_on DESC")
   end
 
   # POST /hr_candidates
@@ -48,11 +49,11 @@ class HrCandidatesController < ApplicationController
   # PUT /hr_candidates/1
   def update
     @hr_candidate = HrCandidate.find(params[:id])
-
+    @hr_candidate.init_hr_change(params[:notes])
     respond_to do |format|
       if @hr_candidate.update_attributes(params[:hr_candidate])
         flash[:notice] = l(:notice_successful_update)
-        format.html { redirect_to(hr_candidates_path) }
+        format.html { redirect_to(hr_candidate_path(@hr_candidate)) }
       else
         format.html { render :action => "edit" }
       end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  hr_change_id: 1
+  property: MyString
+  prop_key: MyString
+  old_value: MyText
+  value: MyText
+two:
+  id: 2
+  hr_change_id: 1
+  property: MyString
+  prop_key: MyString
+  old_value: MyText
+  value: MyText

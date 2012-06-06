@@ -28,3 +28,8 @@
     %p
       %strong= l(:field_description)
     .wiki= textilizable @hr_candidate, :description
+
+- if @hr_changes.present?
+  #history
+    %h3=l(:label_history)
+    = render :partial => 'history', :locals => { :hr_changes => @hr_changes }
