@@ -18,7 +18,8 @@ class HrCandidatesController < ApplicationController
       eql_hr_job_id(params[:hr_job_id]).
       eql_hr_status_id(params[:hr_status_id]).
       eql_birth_date(params[:birth_date]).
-      eql_due_date(params[:due_date])
+      eql_due_date(params[:due_date]).
+      period_time_period(params[:time_period])
     
     @hr_candidate_count = scope.count
     @hr_candidate_pages = Paginator.new self, @hr_candidate_count, @limit, params[:page]

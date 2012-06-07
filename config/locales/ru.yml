@@ -19,6 +19,10 @@ ru:
   label_hr_candidate_new: "Добавить кандидата"
   label_new_hr_candidate: "Новый кандидат"
   label_edit_hr_candidate: "Изменение данных кандидата"
+
+  label_tomorrow: "завтра"
+  label_next_week: "на следующей неделе"
+  label_next_month: "следующий месяц"
   
   field_phone: "Контактный телефон"
   field_birth_date: "Дата рождения"

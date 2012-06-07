@@ -6,18 +6,8 @@
 - form_tag({}, :method => :get) do
   %fieldset
     %legend= l(:label_filter_plural)
-    
-    %label{:for=>'name'}= l(:field_hr_candidate_fullname) + ":"
-    = text_field_tag 'name', params[:name], :size => 30
-    
-    %label{:for=>'phone'}= l(:field_phone) + ":"
-    = text_field_tag 'phone', params[:phone], :size => 10
 
-    %label{:for=>'birth_date'}= l(:field_birth_date) + ":"
-    = text_field_tag :birth_date, params[:birth_date], :size => 10, :onchange => "this.form.submit(); return false;"
-    = calendar_for('birth_date')
- 
-    %br    
+    = hidden_field_tag :time_period, params[:time_period]
     
     %label{:for=>'hr_job_id'}= l(:field_hr_job) + ":"
     %select{:id => 'hr_job_id', :name => 'hr_job_id', :class => "small", :onchange => "this.form.submit(); return false;"}
@@ -40,13 +30,15 @@
         - else
           %option{:value => hr_status.id}
             = hr_status.name
-
-    %label{:for=>'due_date'}= l(:field_due_date) + ":"
-    = text_field_tag :due_date, params[:due_date], :size => 10, :onchange => "this.form.submit(); return false;"
-    = calendar_for('due_date')
-   
-    = submit_tag l(:button_apply), :class => "small", :name => nil
-    = link_to l(:button_clear), users_path, :class => 'icon icon-reload'
+    %br
+    
+    %label=l(:field_due_date) + ":"
+    - %w{today tomorrow this_week next_week this_month next_month}.each do |key|
+      - if params[:time_period] == key
+        %strong= l(:"label_#{key}")
+      - else
+        = link_to l(:"label_#{key}"), {:time_period => key }.merge(params)        
+      = "/"
 
 &nbsp;
 
@@ -74,5 +66,18 @@
           = link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
 %p.pagination= pagination_links_full @hr_candidate_pages, @hr_candidate_count
+
+- form_tag({}, :method => :get) do
+  %fieldset
+    %legend= l(:label_filter_plural)
+            
+    %label{:for=>'name'}= l(:field_hr_candidate_fullname) + ":"
+    = text_field_tag 'name', params[:name], :size => 30
+    
+    %label{:for=>'phone'}= l(:field_phone) + ":"
+    = text_field_tag 'phone', params[:phone], :size => 10
+    
+    = submit_tag l(:button_apply), :class => "small", :name => nil
+    = link_to l(:button_clear), hr_candidates_path, :class => 'icon icon-reload'
 
 - html_title(l(:label_hr_status_plural))

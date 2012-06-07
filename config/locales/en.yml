@@ -19,6 +19,10 @@ en:
   label_hr_candidate_new: "Add Candidate"
   label_new_hr_candidate: "New Candidate"
   label_edit_hr_candidate: "Edit Candidate Information"
+
+  label_tomorrow: "tomorrow"
+  label_next_week: "next week"
+  label_next_month: "next month"
   
   field_phone: "Telephone Number"
   field_birth_date: "Birth Date"

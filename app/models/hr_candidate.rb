@@ -55,6 +55,38 @@ class HrCandidate < ActiveRecord::Base
     end
   }
   
+  named_scope :period_time_period, lambda {|q|
+    today = Date.today
+    if q.present?
+      {:conditions => 
+        (case q
+          when "today"
+            {:due_date => today}
+          when "tomorrow"
+            {:due_date => 1.day.from_now}
+          when "this_week"
+            ["due_date >= ? AND due_date <= ?", 
+              today, 
+              1.week.from_now - today.wday.days]
+          when "next_week"
+            ["due_date >= ? AND due_date <= ?", 
+              1.week.from_now - today.wday.days, 
+              2.week.from_now - today.wday.days]
+          when "this_month"
+            ["due_date >= ? AND due_date <= ?", 
+              today, 
+              1.month.from_now - today.day.days]
+          when "next_month"
+            ["due_date >= ? AND due_date <= ?", 
+              1.month.from_now - today.day.days, 
+              2.month.from_now - today.day.days]
+          else
+            {}
+        end)
+      }
+    end
+  }
+  
   def to_s
     name
   end
