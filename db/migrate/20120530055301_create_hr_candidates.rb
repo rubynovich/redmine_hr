@@ -3,7 +3,7 @@ class CreateHrCandidates < ActiveRecord::Migration
     create_table :hr_candidates do |t|
       t.column :name, :string, :default => ""
       t.column :phone, :string, :default => ""
-      t.column :birth_date, :date, :null => false
+      t.column :birth_date, :date
       t.column :due_date, :date, :null => false
       t.column :to_do, :text
       t.column :done, :text
