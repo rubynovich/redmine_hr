@@ -25,7 +25,7 @@
         %td{:align=>"center"}= link_to h(hr_candidate.hr_job), hr_job_path(hr_candidate.hr_job)
         %td{:align=>"center"}= format_date(hr_candidate.due_date)
         %td.buttons
-          = link_to l(:button_update), {:controller => 'hr_candidates', :action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'
+          = link_to l(:button_update), {:action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'
           = link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
 %p.pagination= pagination_links_full @hr_candidate_pages
