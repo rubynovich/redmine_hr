@@ -16,6 +16,10 @@ class HrJob < ActiveRecord::Base
     name
   end
   
+  def <=>(other)
+    self.name <=> other.name
+  end
+  
   private
     def deletable?
       HrCandidate.find(:first, :conditions => ["hr_status_id=?", self.id])

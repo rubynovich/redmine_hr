@@ -45,12 +45,12 @@
 %table.list
   %thead
     %tr
-      %th=l(:field_hr_candidate_fullname)
-      %th=l(:field_birth_date)
-      %th=l(:field_phone)
-      %th=l(:field_hr_job)
-      %th=l(:field_hr_status)
-      %th=l(:field_due_date)
+      = sort_header_tag 'name', :caption => l(:field_hr_candidate_fullname)
+      = sort_header_tag 'birth_date', :caption => l(:field_birth_date)
+      = sort_header_tag 'phone', :caption => l(:field_phone)
+      = sort_header_tag 'hr_job_id', :caption => l(:field_hr_job)
+      = sort_header_tag 'hr_status_id', :caption => l(:field_hr_status)
+      = sort_header_tag 'due_date', :caption => l(:field_due_date)
       %th
   %tbody
     - for hr_candidate in @hr_candidates
