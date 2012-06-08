@@ -33,7 +33,7 @@
     %br
     
     %label=l(:field_due_date) + ":"
-    - %w{today tomorrow this_week next_week this_month next_month}.each do |key|
+    - %w{all yesterday today tomorrow this_week next_week this_month next_month}.each do |key|
       - if params[:time_period] == key
         %strong= l(:"label_#{key}")
       - else

@@ -60,6 +60,8 @@ class HrCandidate < ActiveRecord::Base
     if q.present?
       {:conditions => 
         (case q
+          when "yesterday"
+            {:due_date => 1.day.ago}
           when "today"
             {:due_date => today}
           when "tomorrow"
