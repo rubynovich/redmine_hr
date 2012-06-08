@@ -16,9 +16,11 @@
         - if params[:hr_job_id].to_i == hr_job.id
           %option{:value => hr_job.id, :selected => "selected"}
             = hr_job.name
+            = "(#{hr_job.hr_candidates.count})"
         - else
           %option{:value => hr_job.id}
             = hr_job.name
+            = "(#{hr_job.hr_candidates.count})"            
             
     %label{:for=>'hr_status_id'}= l(:field_hr_status) + ":"
     %select{:id => 'hr_status_id', :name => 'hr_status_id', :class => "small", :onchange => "this.form.submit(); return false;"}
@@ -27,18 +29,21 @@
         - if params[:hr_status_id].to_i == hr_status.id
           %option{:value => hr_status.id, :selected => "selected"}
             = hr_status.name
+            = "(#{hr_status.hr_candidates.count})"
         - else
           %option{:value => hr_status.id}
             = hr_status.name
+            = "(#{hr_status.hr_candidates.count})"
     %br
     
     %label=l(:field_due_date) + ":"
     - %w{all yesterday today tomorrow this_week next_week this_month next_month}.each do |key|
       - if params[:time_period] == key
-        %strong= l(:"label_#{key}")
+        %strong
+          = l(:"label_#{key}")
       - else
         = link_to l(:"label_#{key}"), params.merge( :time_period => key )
-      = "/"
+      = "(#{HrCandidate.period_time_period(key).count}) /"
 
 &nbsp;
 

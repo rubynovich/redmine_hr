@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_hr do
   name 'Redmine HR plugin'
   author 'Roman Shipiev'
   description 'Redmine plugin for HR-managers'
-  version '0.2.1'
+  version '0.2.2'
   url 'http://github.com/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'
 
