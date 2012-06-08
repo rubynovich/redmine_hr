@@ -64,20 +64,20 @@ class HrCandidate < ActiveRecord::Base
             {:due_date => today}
           when "tomorrow"
             {:due_date => 1.day.from_now}
-          when "this_week"
-            ["due_date >= ? AND due_date <= ?", 
+          when "this_week"            
+            ["due_date BETWEEN ? AND ?", 
               today, 
               1.week.from_now - today.wday.days]
           when "next_week"
-            ["due_date >= ? AND due_date <= ?", 
+            ["due_date BETWEEN ? AND ?", 
               1.week.from_now - today.wday.days, 
               2.week.from_now - today.wday.days]
           when "this_month"
-            ["due_date >= ? AND due_date <= ?", 
+            ["due_date BETWEEN ? AND ?", 
               today, 
               1.month.from_now - today.day.days]
           when "next_month"
-            ["due_date >= ? AND due_date <= ?", 
+            ["due_date BETWEEN ? AND ?", 
               1.month.from_now - today.day.days, 
               2.month.from_now - today.day.days]
           else
