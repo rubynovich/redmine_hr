@@ -4,7 +4,7 @@
     %p= f.text_field :name, :required => true, :size => 40, :label => false
     %p= f.text_field :phone, :size => 20
     %p
-      = f.text_field :birth_date, :size => 10, :required => true
+      = f.text_field :birth_date, :size => 10
       = calendar_for('hr_candidate_birth_date')
     
   .splitcontentright
