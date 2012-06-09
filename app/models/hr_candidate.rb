@@ -11,7 +11,7 @@ class HrCandidate < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'    
   belongs_to :hr_job
   belongs_to :hr_status
-  has_many :hr_changes
+  has_many :hr_changes, :dependent => :destroy
   
   after_update :save_hr_change
 

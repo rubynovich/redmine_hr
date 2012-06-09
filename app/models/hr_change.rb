@@ -3,7 +3,7 @@ class HrChange < ActiveRecord::Base
   
   belongs_to :hr_candidate
   belongs_to :user
-  has_many :hr_change_details
+  has_many :hr_change_details, :dependent => :destroy
 
   def save(*args)
     # Do not save an empty journal
