@@ -1,9 +1,9 @@
 class HrCandidate < ActiveRecord::Base
   unloadable
   
-  validates_presence_of :name, :scope => :birth_date
-  validates_uniqueness_of :name
-  validates_presence_of :hr_job_id, :hr_status_id, :due_date, :birth_date
+  validates_uniqueness_of :name, :scope => :birth_date, :if => "birth_date.present?"
+  validates_uniqueness_of :name, :if => "birth_date.blank?"
+  validates_presence_of :name, :hr_job_id, :hr_status_id, :due_date
   validates_format_of :phone, :with => /^(\d{10}|)$/,
     :message => I18n.t(:message_incorrect_format_phone)
   validate :validate_due_date
@@ -60,6 +60,8 @@ class HrCandidate < ActiveRecord::Base
     if q.present?
       {:conditions => 
         (case q
+          when "yesterday"
+            {:due_date => 1.day.ago}
           when "today"
             {:due_date => today}
           when "tomorrow"

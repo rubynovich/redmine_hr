@@ -5,7 +5,10 @@
   .box
     %fieldset
       %legend= l(:field_notes)
-      %p= text_area_tag :notes, nil, :cols => 60, :rows => 15, :class => 'wiki-edit'
+      %p= text_area_tag :notes, nil, :cols => 60, :rows => 5, :class => 'wiki-edit'
     = wikitoolbar_for 'notes'
   = submit_tag l(:button_save)
 
+#history
+  %h3=l(:label_history)
+  = render :partial => 'history', :locals => { :hr_changes => @hr_candidate.hr_changes }

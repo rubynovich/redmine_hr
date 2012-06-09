@@ -14,7 +14,9 @@
   %tbody
     - for hr_status in @hr_statuses
       %tr{:class=>cycle("odd", "even")}
-        %td= link_to h(hr_status.name), hr_status_path(hr_status)
+        %td
+          = link_to h(hr_status.name), hr_status_path(hr_status)
+          = "(#{hr_status.hr_candidates.count})"
         %td{:align=>"center"}= checked_image hr_status.is_default?
         %td{:align=>"center"}= checked_image hr_status.is_closed?        
         %td{:align=>"center", :style=>"width:15%;"}= reorder_links('hr_status', {:action => 'update', :id => hr_status}, :put)
