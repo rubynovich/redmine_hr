@@ -29,10 +29,7 @@ class HrCandidatesController < ApplicationController
                                   :limit  =>  @limit,
                                   :offset =>  @offset
     
-    
-    
-#    @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC"
-#    render :action => "index", :layout => false if request.xhr?
+#    render :action => "index", :layout => request.xhr?!
   end
 
   # GET /hr_candidates/new
