@@ -61,8 +61,12 @@
     - for hr_candidate in @hr_candidates
       %tr{:class=>cycle("odd", "even")}
         %td= link_to h(hr_candidate.name), hr_candidate_path(hr_candidate)
-        %td{:align=>"center"}= link_to(format_date(hr_candidate.birth_date), :birth_date => hr_candidate.birth_date)
-        %td{:align=>"center"}= link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
+        %td{:align=>"center"}
+          - if hr_candidate.birth_date.present?
+            = link_to(format_date(hr_candidate.birth_date), :birth_date => hr_candidate.birth_date)
+        %td{:align=>"center"}
+          - if hr_candidate.phone.present?
+            = link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
         %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
         %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
         %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
