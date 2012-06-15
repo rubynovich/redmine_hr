@@ -6,13 +6,7 @@ class HrMembersController < ApplicationController
 
   def index
     @hr_members = HrMember.all
-  end
-  
-#  def autocomplete_for_user
-#    @group = Group.find(params[:id])
-#    @users = User.active.not_in_group(@group).like(params[:q]).all(:limit => 100)
-#    render :layout => false
-#  end  
+  end 
   
   def create
     users = User.find_all_by_id(params[:user_ids])

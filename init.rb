@@ -1,9 +1,9 @@
 require 'redmine'
 require 'dispatcher'
-require 'user_patch'
+require 'hr_user_patch'
 
 Dispatcher.to_prepare do
-  User.send(:include, HR) unless User.include? HR
+  User.send(:include, HRUserPatch) unless User.include? HRUserPatch
 end
 
 Redmine::Plugin.register :redmine_hr do
