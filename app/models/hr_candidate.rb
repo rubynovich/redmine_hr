@@ -6,6 +6,8 @@ class HrCandidate < ActiveRecord::Base
   validates_presence_of :name, :hr_job_id, :hr_status_id, :due_date
   validates_format_of :phone, :with => /^(\d{10}|)$/,
     :message => I18n.t(:message_incorrect_format_phone)
+  validates_format_of :due_date, :with => /^(\d{4}-\d{2}-\d{2})$/
+  validates_format_of :birth_date, :with => /^(\d{4}-\d{2}-\d{2}|)$/
   validate :validate_due_date
   
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'    
@@ -115,7 +117,7 @@ class HrCandidate < ActiveRecord::Base
     if @current_hr_change
       # attributes changes
       if @attributes_before_change
-        (HrCandidate.column_names - %w(id description author_id created_on updated_on)).each do |c|
+        (HrCandidate.column_names - %w(id description birth_date author_id created_on updated_on)).each do |c|
           before = @attributes_before_change[c]
           after = send(c)
           next if before == after || (before.blank? && after.blank?)

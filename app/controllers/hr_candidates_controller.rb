@@ -39,6 +39,8 @@ class HrCandidatesController < ApplicationController
   
   # POST /hr_candidates
   def create
+    raise( {:birth_date => params[:hr_candidate][:birth_date], 
+    :due_date => params[:hr_candidate][:due_date]}.inspect )
     @hr_candidate = HrCandidate.new(params[:hr_candidate])
     if request.post? && @hr_candidate.save
       flash[:notice] = l(:notice_successful_create)
