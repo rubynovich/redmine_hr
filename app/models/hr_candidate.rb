@@ -6,8 +6,8 @@ class HrCandidate < ActiveRecord::Base
   validates_presence_of :name, :hr_job_id, :hr_status_id, :due_date
   validates_format_of :phone, :with => /^(\d{10}|)$/,
     :message => I18n.t(:message_incorrect_format_phone)
-  validates_format_of :due_date, :with => /^(\d{4}-\d{2}-\d{2})$/
-  validates_format_of :birth_date, :with => /^(\d{4}-\d{2}-\d{2}|)$/
+  validates_format_of :due_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2})$/
+  validates_format_of :birth_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2}|                                                                            )$/
   validate :validate_due_date
   
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'    
@@ -101,7 +101,7 @@ class HrCandidate < ActiveRecord::Base
   
   def validate_due_date
     if self.due_date and self.due_date < Date.today
-      errors.add :due_date, :invalid      
+      errors.add :due_date, :greated_then_now
     end
   end
   

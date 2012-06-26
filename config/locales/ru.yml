@@ -37,4 +37,10 @@ ru:
   error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"
   
   message_incorrect_format_phone: "задан неверно. Он должен состоять только из 10 цифр"
-  
+  activerecord:
+    errors:
+      models:
+        hr_candidate:
+          attributes:
+            due_date:
+              greated_then_now: "должна быть позже настоящего времени"  

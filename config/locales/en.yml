@@ -35,3 +35,10 @@ en:
   error_unable_delete_hr_candidate: "Unable delete the Candidate"
   error_unable_delete_hr_job: "Unable delete the Job"
   error_unable_delete_hr_status: "Unable delete the Approval Status" 
+  activerecord:
+    errors:
+      models:
+        hr_candidate:
+          attributes:
+            due_date:
+              greated_then_now: "must be greated then now"
