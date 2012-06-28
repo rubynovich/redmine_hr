@@ -148,7 +148,7 @@ class HrCandidate < ActiveRecord::Base
   end
 
   def destroyable_by?(user=User.current)
-    false
+    user.is_hr?
   end
   
   def attachment_added(obj)
@@ -158,6 +158,7 @@ class HrCandidate < ActiveRecord::Base
   end
 
   def attachment_removed(obj)
+    init_hr_change(nil)
     if @current_hr_change && !obj.new_record?
       @current_hr_change.hr_change_details << HrChangeDetail.new(:property => 'attachment', :prop_key => obj.id, :old_value => obj.filename)
       @current_hr_change.save
