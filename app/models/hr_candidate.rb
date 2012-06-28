@@ -1,5 +1,6 @@
 class HrCandidate < ActiveRecord::Base
   unloadable
+  acts_as_attachable :after_add => :attachment_added, :after_remove => :attachment_removed
   
   validates_uniqueness_of :name, :scope => :birth_date, :if => "birth_date.present?"
   validates_uniqueness_of :name, :if => "birth_date.blank?"
@@ -9,6 +10,8 @@ class HrCandidate < ActiveRecord::Base
   validates_format_of :due_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2})$/
   validates_format_of :birth_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2}|                                                                            )$/
   validate :validate_due_date
+
+  attr_accessor :project
   
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'    
   belongs_to :hr_job
@@ -131,4 +134,33 @@ class HrCandidate < ActiveRecord::Base
       @current_hr_change.save
     end  
   end
+  
+  def attachments_visible?(user=User.current)
+    user.is_hr?
+  end
+
+  def attachments_deletable?(user=User.current)
+    user.is_hr?
+  end
+       
+  def editable_by?(user=User.current)
+    user.is_hr?
+  end
+
+  def destroyable_by?(user=User.current)
+    false
+  end
+  
+  def attachment_added(obj)
+    if @current_hr_change && !obj.new_record?
+      @current_hr_change.hr_change_details << HrChangeDetail.new(:property => 'attachment', :prop_key => obj.id, :value => obj.filename)
+    end
+  end
+
+  def attachment_removed(obj)
+    if @current_hr_change && !obj.new_record?
+      @current_hr_change.hr_change_details << HrChangeDetail.new(:property => 'attachment', :prop_key => obj.id, :old_value => obj.filename)
+      @current_hr_change.save
+    end
+  end  
 end

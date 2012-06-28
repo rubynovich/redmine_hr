@@ -17,5 +17,9 @@
   %div{:style=>"clear:both"}
 
   %p= f.text_area :description, :cols => 60, :rows => 15, :class => 'wiki-edit'
+  = link_to_attachments @hr_candidate if @hr_candidate.attachments.any? 
+  %p#attachments_form
+    = label_tag('attachments[1][file]', l(:label_attachment_plural))
+    = render :partial => 'attachments/form', :locals => {:container => @hr_candidate}  
 
 = wikitoolbar_for 'hr_candidate_description'

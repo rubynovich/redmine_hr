@@ -2,6 +2,8 @@ class HrCandidatesController < ApplicationController
   unloadable
   before_filter :require_hr
 
+  helper :attachments
+  include AttachmentsHelper
   helper :sort
   include SortHelper
 
@@ -27,9 +29,7 @@ class HrCandidatesController < ApplicationController
     @hr_candidates =  scope.find  :all,
                                   :order => sort_clause,
                                   :limit  =>  @limit,
-                                  :offset =>  @offset
-    
-#    render :action => "index", :layout => request.xhr?!
+                                  :offset =>  @offset    
   end
 
   # GET /hr_candidates/new
@@ -37,19 +37,6 @@ class HrCandidatesController < ApplicationController
     @hr_candidate = HrCandidate.new(:hr_status => HrStatus.default, :author_id =>  User.current.id)
   end
   
-  # POST /hr_candidates
-  def create
-    raise( {:birth_date => params[:hr_candidate][:birth_date], 
-    :due_date => params[:hr_candidate][:due_date]}.inspect )
-    @hr_candidate = HrCandidate.new(params[:hr_candidate])
-    if request.post? && @hr_candidate.save
-      flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index'
-    else
-      render :action => 'new'
-    end
-  end
-
   # GET /hr_candidates/1/edit
   def edit
     @hr_candidate = HrCandidate.find(params[:id])
@@ -64,7 +51,9 @@ class HrCandidatesController < ApplicationController
   # POST /hr_candidates
   def create
     @hr_candidate = HrCandidate.new(params[:hr_candidate])
+    @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
     if request.post? && @hr_candidate.save
+      render_attachment_warning_if_needed(@hr_candidate)    
       flash[:notice] = l(:notice_successful_create)
       redirect_to :action => 'index'
     else
@@ -74,10 +63,12 @@ class HrCandidatesController < ApplicationController
 
   # PUT /hr_candidates/1
   def update
-    @hr_candidate = HrCandidate.find(params[:id])
-    @hr_candidate.init_hr_change(params[:notes])
+    @hr_candidate = HrCandidate.find(params[:id])    
+    @hr_candidate.init_hr_change(params[:notes])    
+    @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))        
     respond_to do |format|
       if @hr_candidate.update_attributes(params[:hr_candidate])
+        render_attachment_warning_if_needed(@hr_candidate)          
         flash[:notice] = l(:notice_successful_update)
         format.html { redirect_to(hr_candidate_path(@hr_candidate)) }
       else

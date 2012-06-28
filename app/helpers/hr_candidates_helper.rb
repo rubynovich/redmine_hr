@@ -6,19 +6,24 @@ module HrCandidatesHelper
   end
 
   def show_detail(detail, no_html=false, options={})
-    multiple = false
-    field = detail.prop_key.to_s.gsub(/\_id$/, "")
-    label = l(("field_" + field).to_sym)
-    case detail.prop_key
-      when 'due_date', 'birth_date'
-        value = format_date(detail.value.to_date) if detail.value
-        old_value = format_date(detail.old_value.to_date) if detail.old_value
+    case detail.property
+    when 'attr'  
+      multiple = false
+      field = detail.prop_key.to_s.gsub(/\_id$/, "")
+      label = l(("field_" + field).to_sym)
+      case detail.prop_key
+        when 'due_date', 'birth_date'
+          value = format_date(detail.value.to_date) if detail.value
+          old_value = format_date(detail.old_value.to_date) if detail.old_value
 
-      when 'project_id', 'status_id', 'tracker_id', 'assigned_to_id',
-           'priority_id', 'category_id', 'fixed_version_id',
-           'hr_status_id', 'hr_job_id'
-        value = find_name_by_reflection(field, detail.value)
-        old_value = find_name_by_reflection(field, detail.old_value)      
+        when 'project_id', 'status_id', 'tracker_id', 'assigned_to_id',
+             'priority_id', 'category_id', 'fixed_version_id',
+             'hr_status_id', 'hr_job_id'
+          value = find_name_by_reflection(field, detail.value)
+          old_value = find_name_by_reflection(field, detail.old_value)      
+      end
+    when 'attachment'
+      label = l(:label_attachment)
     end
 
     label ||= detail.prop_key
@@ -29,7 +34,19 @@ module HrCandidatesHelper
       label = content_tag('strong', label)
       old_value = content_tag("i", h(old_value)) if detail.old_value
       old_value = content_tag("strike", old_value) if detail.old_value and detail.value.blank?
-      value = content_tag("i", h(value)) if value
+      if detail.property == 'attachment' && !value.blank? && atta = Attachment.find_by_id(detail.prop_key)
+        # Link to the attachment if it has not been removed
+        value = link_to_attachment(atta, :download => true, :only_path => options[:only_path])
+        if options[:only_path] != false && atta.is_text?
+          value += link_to(
+                       image_tag('magnifier.png'),
+                       :controller => 'attachments', :action => 'show',
+                       :id => atta, :filename => atta.filename
+                     )
+        end
+      else      
+        value = content_tag("i", h(value)) if value
+      end
     end
 
     if detail.property == 'attr' && detail.prop_key == 'description'
@@ -43,13 +60,18 @@ module HrCandidatesHelper
       end
       s.html_safe
     elsif detail.value.present?
-      if detail.old_value.present?
-        l(:text_journal_changed, :label => label, :old => old_value, :new => value).html_safe
-      elsif multiple
+      case detail.property
+      when 'attr', 'cf'
+        if detail.old_value.present?
+          l(:text_journal_changed, :label => label, :old => old_value, :new => value).html_safe
+        elsif multiple
+          l(:text_journal_added, :label => label, :value => value).html_safe
+        else
+          l(:text_journal_set_to, :label => label, :value => value).html_safe
+        end
+      when 'attachment'
         l(:text_journal_added, :label => label, :value => value).html_safe
-      else
-        l(:text_journal_set_to, :label => label, :value => value).html_safe
-      end
+      end        
     else
       l(:text_journal_deleted, :label => label, :old => old_value).html_safe
     end

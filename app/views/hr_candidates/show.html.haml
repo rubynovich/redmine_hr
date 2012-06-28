@@ -25,9 +25,10 @@
       %th.due_date= l(:field_due_date)+":"
       %td.due_date= format_date(@hr_candidate.due_date)
   %hr
-    %p
-      %strong= l(:field_description)
-    .wiki= textilizable @hr_candidate, :description
+  %p
+    %strong= l(:field_description)
+  .wiki= textilizable @hr_candidate, :description, :attachments => @hr_candidate.attachments
+  = link_to_attachments @hr_candidate
 
 - if @hr_changes.present?
   #history
