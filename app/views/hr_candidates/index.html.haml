@@ -56,6 +56,7 @@
       = sort_header_tag 'hr_job_id', :caption => l(:field_hr_job)
       = sort_header_tag 'hr_status_id', :caption => l(:field_hr_status)
       = sort_header_tag 'due_date', :caption => l(:field_due_date)
+      = sort_header_tag 'updated_on', :caption => l(:field_updated_on)      
       = sort_header_tag 'created_on', :caption => l(:field_created_on)      
       %th
   %tbody
@@ -71,6 +72,7 @@
         %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
         %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
         %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
+        %td{:align=>"center"}= format_date(hr_candidate.updated_on)         
         %td{:align=>"center"}= format_date(hr_candidate.created_on) 
         %td.buttons
           = link_to l(:button_update), {:action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'

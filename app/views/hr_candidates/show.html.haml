@@ -24,6 +24,12 @@
       %td.birth_date= format_date(@hr_candidate.birth_date)
       %th.due_date= l(:field_due_date)+":"
       %td.due_date= format_date(@hr_candidate.due_date)
+    %tr
+      %th.updated_on= l(:field_updated_on)+":"
+      %td.updated_on= format_date(@hr_candidate.updated_on)
+      %th.created_on= l(:field_created_on)+":"
+      %td.created_on= format_date(@hr_candidate.created_on)
+      
   %hr
   %p
     %strong= l(:field_description)

@@ -10,7 +10,7 @@ class HrCandidatesController < ApplicationController
   # GET /hr_candidates/
   def index
     sort_init 'due_date', 'desc'
-    sort_update %w(name birth_date phone hr_status_id hr_job_id due_date created_on)
+    sort_update %w(name birth_date phone hr_status_id hr_job_id due_date updated_on created_on)
     
     @limit = per_page_option
     
