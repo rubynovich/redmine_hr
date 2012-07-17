@@ -26,5 +26,5 @@
 
 == Remove
 
-  rake db:migrate:plugins NAME=redmine_hr VERSION=0 RAILS_ENV=production
+  rake db:migrate:plugin NAME=redmine_hr VERSION=0 RAILS_ENV=production
   ./script/plugin remove redmine_hr

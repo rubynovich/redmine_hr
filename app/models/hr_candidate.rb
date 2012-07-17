@@ -8,7 +8,7 @@ class HrCandidate < ActiveRecord::Base
   validates_format_of :phone, :with => /^(\d{10}|)$/,
     :message => I18n.t(:message_incorrect_format_phone)
   validates_format_of :due_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2})$/
-  validates_format_of :birth_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2}|                                                                            )$/
+  validates_format_of :birth_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2}|)$/
   validate :validate_due_date
 
   attr_accessor :project
