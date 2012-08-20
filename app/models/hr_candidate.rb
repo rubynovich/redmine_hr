@@ -164,4 +164,10 @@ class HrCandidate < ActiveRecord::Base
       @current_hr_change.save
     end
   end  
+  
+  def create_issues
+    HrAdaptiveIssue.all.map do |issue|
+      issue.create_issue(self)
+    end
+  end
 end

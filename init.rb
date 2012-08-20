@@ -26,6 +26,10 @@ Redmine::Plugin.register :redmine_hr do
     {:controller => :hr_jobs, :action => :index},
     :caption => :label_hr_job_plural, 
     :if => Proc.new{ User.current.is_hr? }
+  menu :application_menu, :hr_adaptive_issues, 
+    {:controller => :hr_adaptive_issues, :action => :index},
+    :caption => :label_hr_adaptive_issue_plural, 
+    :if => Proc.new{ User.current.is_hr? }
     
   menu :admin_menu, :hr_members, 
     {:controller => :hr_members, :action => :index}, :caption => :label_hr_member_plural, :html => {:class => :users}

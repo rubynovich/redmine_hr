@@ -1,0 +1,9 @@
+%h2
+  = link_to l(:label_hr_adaptive_issue_plural), hr_adaptive_issues_path
+  &#187;
+  =l(:label_hr_adaptive_issue_new)
+
+- labelled_form_for @hr_adaptive_issue do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  = submit_tag l(:button_create)
+

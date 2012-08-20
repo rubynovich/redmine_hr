@@ -20,6 +20,12 @@ ru:
   label_new_hr_candidate: "Новый кандидат"
   label_edit_hr_candidate: "Изменение данных кандидата"
 
+  label_hr_adaptive_issue: "Адаптационная задача"
+  label_hr_adaptive_issue_plural: "Адаптационный лист"
+  label_hr_adaptive_issue_new: "Добавить адаптационную задачу"
+  label_new_hr_adaptive_issue: "Новая адаптационная задача"
+  label_edit_hr_adaptive_issue: "Изменение адаптационной задачи"
+
   label_tomorrow: "завтра"
   label_next_week: "на следующей неделе"
   label_next_month: "следующий месяц"
@@ -31,12 +37,23 @@ ru:
   field_hr_candidate_fullname: "ФИО кандидата"
   field_hr_job: "Вакансия"
   field_hr_status: "Статус рассмотрения"
+  field_hr_adaptive_issue: "Адаптационная задача"
   
   error_unable_delete_hr_candidate: "Удаление кандидата невозможно"
   error_unable_delete_hr_job: "Удаление вакансии невозможно"
   error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"
+  error_unable_delete_hr_adaptive_issue: "Удаление адаптационной задачи невозможно"
   
   message_incorrect_format_phone: "задан неверно. Он должен состоять только из 10 цифр"
+  message_about_hr_candidate: "Новый сотрудник %{name} (%{job}) приступает к работе %{fwd}"
+  list_adaptive_issue_date_variants:
+    now: "Дата смены статуса"
+    1d_fwd: "За день до выхода на работу"
+    fwd: "Выход на работу"
+    fwd_2w: "Спустя 2 недели работы"
+    fwd_1m: "Спустя месяц работы"
+    fwd_3m: "Окончание испытательного срока"
+    
   activerecord:
     errors:
       models:

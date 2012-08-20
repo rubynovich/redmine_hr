@@ -1,0 +1,20 @@
+= error_messages_for @hr_adaptive_issue
+.box.tabular
+  %p= f.text_field :subject, :size => 80, :required => true
+  %p= f.select :project_id, Project.visible.collect {|t| [t.name, t.id]}, :required => true
+  %p= f.select :tracker_id, Tracker.all.collect {|t| [t.name, t.id]}, :required => true, :size => 10
+ 
+  .splitcontentleft
+    %p= f.select :start_date, HrAdaptiveIssue.start_date_variants.collect{|s| [t(s, :scope => 'list_adaptive_issue_date_variants'), s]}, :required => true, :size => 10
+    %p= f.select :priority_id, IssuePriority.all.collect{|t| [t.name, t.id]}, :required => true, :size => 10
+    
+  .splitcontentright
+    %p= f.select :due_date, HrAdaptiveIssue.due_date_variants.collect{|s| [t(s, :scope => 'list_adaptive_issue_date_variants'), s]}, :required => true, :size => 10
+    %p= f.select :assigned_to_id, User.active.all.collect{|t| [t.name, t.id]}, :required => true, :size => 10
+    
+  %div{:style=>"clear:both"}
+  %p= f.text_area :description, :cols => 60, :rows => 15, :class => 'wiki-edit'  
+
+= wikitoolbar_for 'hr_adaptive_issue_description'
+
+

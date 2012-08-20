@@ -1,0 +1,40 @@
+.contextual
+  = link_to l(:button_add), {:action => 'new'}, :class => 'icon icon-add'
+  = link_to l(:button_update), {:action => 'edit', :id => @hr_adaptive_issue.id}, :class => 'icon icon-edit'
+  = link_to l(:button_delete), hr_adaptive_issue_path(@hr_adaptive_issue), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+
+%h2
+  = link_to l(:label_hr_adaptive_issue_plural), hr_adaptive_issues_path
+  &#187; 
+  =h @hr_adaptive_issue
+
+
+.issue.details  
+  %table.attributes
+    %tr
+      %th=l(:field_project)+":"
+      %td= @hr_adaptive_issue.project
+      %th=l(:field_tracker)+":"
+      %td= @hr_adaptive_issue.tracker      
+    %tr
+      %th= l(:field_start_date)+":"
+      %td= t(@hr_adaptive_issue.start_date, :scope => :list_adaptive_issue_date_variants)
+      %th= l(:field_due_date)+":"
+      %td= t(@hr_adaptive_issue.due_date, :scope => :list_adaptive_issue_date_variants)      
+    %tr    
+      %th= l(:field_assigned_to)+":"
+      %td= h(@hr_adaptive_issue.assigned_to)
+      %th= l(:field_priority)+":"
+      %td= h(@hr_adaptive_issue.priority)
+    %tr    
+      %th= l(:field_created_on)+":"
+      %td= format_date(@hr_adaptive_issue.created_on)
+      %th= l(:field_updated_on)+":"
+      %td= format_date(@hr_adaptive_issue.updated_on)      
+          
+  - if @hr_adaptive_issue.description?
+    %hr
+    - if @hr_adaptive_issue.description?
+      %p
+        %strong= l(:field_description)
+      .wiki= textilizable @hr_adaptive_issue, :description
