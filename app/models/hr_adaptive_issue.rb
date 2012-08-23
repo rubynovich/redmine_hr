@@ -7,6 +7,9 @@ class HrAdaptiveIssue < ActiveRecord::Base
   belongs_to :assigned_to, :class_name => 'Principal', :foreign_key => 'assigned_to_id'
   belongs_to :priority, :class_name => 'IssuePriority', :foreign_key => 'priority_id'
   
+  validates_presence_of :project_id, :tracker_id, :status_id, :assigned_to_id, 
+    :priority_id, :subject, :start_date, :due_date
+  
   @@start_date_variants = ["now", "fwd"]
   @@due_date_variants   = ["1d_fwd", "fwd", "fwd_2w", "fwd_1m", "fwd_3m"]
   
