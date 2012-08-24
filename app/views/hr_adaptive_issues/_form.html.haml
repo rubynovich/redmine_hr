@@ -10,7 +10,7 @@
     
   .splitcontentright
     %p= f.select :due_date, HrAdaptiveIssue.due_date_variants.collect{|s| [t(s, :scope => 'list_adaptive_issue_date_variants'), s]}, :required => true, :size => 10
-    %p= f.select :assigned_to_id, User.active.all.collect{|t| [t.name, t.id]}, :required => true, :size => 10
+    %p= f.select :assigned_to_id, User.active.all(:order => "lastname, firstname").collect{|t| [[t.lastname,t.firstname].join(" "), t.id]}, :required => true, :size => 10
     
   %div{:style=>"clear:both"}
   %p= f.text_area :description, :cols => 60, :rows => 15, :class => 'wiki-edit'  
