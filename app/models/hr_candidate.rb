@@ -165,8 +165,8 @@ class HrCandidate < ActiveRecord::Base
     end
   end  
   
-  def create_issues
-    HrAdaptiveIssue.all.map do |issue|
+  def create_issues(hr_status_id)
+    HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
       issue.create_issue(self)
     end
   end

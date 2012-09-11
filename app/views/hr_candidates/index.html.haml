@@ -47,38 +47,42 @@
 
 &nbsp;
 
-%table.list
-  %thead
-    %tr
-      = sort_header_tag 'name', :caption => l(:field_hr_candidate_fullname)
-      = sort_header_tag 'birth_date', :caption => l(:field_birth_date)
-      = sort_header_tag 'phone', :caption => l(:field_phone)
-      = sort_header_tag 'hr_job_id', :caption => l(:field_hr_job)
-      = sort_header_tag 'hr_status_id', :caption => l(:field_hr_status)
-      = sort_header_tag 'due_date', :caption => l(:field_due_date)
-      = sort_header_tag 'updated_on', :caption => l(:field_updated_on)
-      = sort_header_tag 'created_on', :caption => l(:field_created_on)
-      %th
-  %tbody
-    - for hr_candidate in @hr_candidates
-      %tr{:class=>cycle("odd", "even")}
-        %td= link_to h(hr_candidate.name), hr_candidate_path(hr_candidate)
-        %td{:align=>"center"}
-          - if hr_candidate.birth_date.present?
-            = link_to(format_date(hr_candidate.birth_date), :birth_date => hr_candidate.birth_date)
-        %td{:align=>"center"}
-          - if hr_candidate.phone.present?
-            = link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
-        %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
-        %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
-        %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
-        %td{:align=>"center"}= format_date(hr_candidate.updated_on)         
-        %td{:align=>"center"}= format_date(hr_candidate.created_on) 
-        %td.buttons
-          = link_to l(:button_update), {:action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'
-          -# link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+- if @hr_candidates.any?
+  %table.list
+    %thead
+      %tr
+        = sort_header_tag 'name', :caption => l(:field_hr_candidate_fullname)
+        = sort_header_tag 'birth_date', :caption => l(:field_birth_date)
+        = sort_header_tag 'phone', :caption => l(:field_phone)
+        = sort_header_tag 'hr_job_id', :caption => l(:field_hr_job)
+        = sort_header_tag 'hr_status_id', :caption => l(:field_hr_status)
+        = sort_header_tag 'due_date', :caption => l(:field_due_date)
+        = sort_header_tag 'updated_on', :caption => l(:field_updated_on)
+        = sort_header_tag 'created_on', :caption => l(:field_created_on)
+        %th
+    %tbody
+      - @hr_candidates.each do |hr_candidate|
+        %tr{:class=>cycle("odd", "even")}
+          %td= link_to h(hr_candidate.name), hr_candidate_path(hr_candidate)
+          %td{:align=>"center"}
+            - if hr_candidate.birth_date.present?
+              = link_to(format_date(hr_candidate.birth_date), :birth_date => hr_candidate.birth_date)
+          %td{:align=>"center"}
+            - if hr_candidate.phone.present?
+              = link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
+          %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
+          %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
+          %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
+          %td{:align=>"center"}= format_date(hr_candidate.updated_on)         
+          %td{:align=>"center"}= format_date(hr_candidate.created_on) 
+          %td.buttons
+            = link_to l(:button_update), {:action => 'edit', :id => hr_candidate.id}, :class => 'icon icon-edit'
+            -# link_to(l(:button_delete), hr_candidate_path(hr_candidate), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
-%p.pagination= pagination_links_full @hr_candidate_pages, @hr_candidate_count
+  %p.pagination= pagination_links_full @hr_candidate_pages, @hr_candidate_count
+- else
+  %p.nodata
+    = l(:label_no_data)
 
 - form_tag({}, :method => :get) do
   %fieldset

@@ -28,7 +28,7 @@ class HrStatus < ActiveRecord::Base
   
   private
     def deletable?
-      HrCandidate.find(:first, :conditions => ["hr_status_id=?", self.id])
+      HrCandidate.eql_hr_status_id(self.id).count.zero?
     end
     
     def check_integrity

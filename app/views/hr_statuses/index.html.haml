@@ -3,27 +3,31 @@
 
 %h2=l(:label_hr_status_plural)
 
-%table.list
-  %thead
-    %tr
-      %th=l(:field_hr_status)
-      %th=l(:field_is_default)
-      %th=l(:field_is_closed)      
-      %th=l(:button_sort)
-      %th
-  %tbody
-    - for hr_status in @hr_statuses
-      %tr{:class=>cycle("odd", "even")}
-        %td
-          = link_to h(hr_status.name), hr_status_path(hr_status)
-          = "(#{hr_status.hr_candidates.count})"
-        %td{:align=>"center"}= checked_image hr_status.is_default?
-        %td{:align=>"center"}= checked_image hr_status.is_closed?        
-        %td{:align=>"center", :style=>"width:15%;"}= reorder_links('hr_status', {:action => 'update', :id => hr_status}, :put)
-        %td.buttons
-          = link_to l(:button_update), {:action => 'edit', :id => hr_status.id}, :class => 'icon icon-edit'
-          = link_to(l(:button_delete), hr_status_path(hr_status), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+- if @hr_statuses.any?
+  %table.list
+    %thead
+      %tr
+        %th=l(:field_hr_status)
+        %th=l(:field_is_default)
+        %th=l(:field_is_closed)      
+        %th=l(:button_sort)
+        %th
+    %tbody
+      - @hr_statuses.each do |hr_status|
+        %tr{:class=>cycle("odd", "even")}
+          %td
+            = link_to h(hr_status.name), hr_status_path(hr_status)
+            = "(#{hr_status.hr_candidates.count})"
+          %td{:align=>"center"}= checked_image hr_status.is_default?
+          %td{:align=>"center"}= checked_image hr_status.is_closed?        
+          %td{:align=>"center", :style=>"width:15%;"}= reorder_links('hr_status', {:action => 'update', :id => hr_status}, :put)
+          %td.buttons
+            = link_to l(:button_update), {:action => 'edit', :id => hr_status.id}, :class => 'icon icon-edit'
+            = link_to(l(:button_delete), hr_status_path(hr_status), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 
-%p.pagination= pagination_links_full @hr_status_pages
+  %p.pagination= pagination_links_full @hr_status_pages
+- else
+  %p.nodata
+    = l(:label_no_data)
 
 - html_title(l(:label_hr_status_plural))

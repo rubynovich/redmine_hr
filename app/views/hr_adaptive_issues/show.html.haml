@@ -13,9 +13,12 @@
   %table.attributes
     %tr
       %th=l(:field_project)+":"
-      %td= @hr_adaptive_issue.project
+      %td{:colspan => 3}= @hr_adaptive_issue.project
+    %tr
       %th=l(:field_tracker)+":"
       %td= @hr_adaptive_issue.tracker      
+      %th=l(:field_hr_status)+":"
+      %td= @hr_adaptive_issue.hr_status      
     %tr
       %th= l(:field_start_date)+":"
       %td= t(@hr_adaptive_issue.start_date, :scope => :list_adaptive_issue_date_variants)

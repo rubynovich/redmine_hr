@@ -8,8 +8,8 @@ class HrChangeDetail < ActiveRecord::Base
   private
 
   def create_issues
-    if (prop_key == "hr_status_id")&&(HrStatus.find(value).is_closed?)
-      self.hr_change.notes += "\n\n" + self.hr_change.hr_candidate.create_issues.map{ |i| "##{i.id}"}.join(" ")
+    if (prop_key == "hr_status_id")&&(HrAdaptiveIssue.on_status(value).first)
+      self.hr_change.notes += "\n\n" + self.hr_change.hr_candidate.create_issues(value).map{ |i| "##{i.id}"}.join(" ")
       self.hr_change.save
     end
   end

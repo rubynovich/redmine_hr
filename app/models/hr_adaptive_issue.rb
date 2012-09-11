@@ -3,16 +3,23 @@ class HrAdaptiveIssue < ActiveRecord::Base
   
   belongs_to :project
   belongs_to :tracker
+  belongs_to :hr_status  
   belongs_to :assigned_to, :class_name => 'Principal', :foreign_key => 'assigned_to_id'
   belongs_to :priority, :class_name => 'IssuePriority', :foreign_key => 'priority_id'
   
   validates_presence_of :project_id, :tracker_id, :assigned_to_id, 
-    :priority_id, :subject, :start_date, :due_date
+    :priority_id, :subject, :start_date, :due_date, :hr_status_id
   
   @@start_date_variants = ["now", "fwd"]
   @@due_date_variants   = ["1d_fwd", "fwd", "fwd_2w", "fwd_1m", "fwd_3m"]
   
   cattr_accessor :due_date_variants, :start_date_variants
+  
+  named_scope :on_status, lambda{ |hr_status_id|
+    if hr_status_id.present?
+      {:conditions => {:hr_status_id => hr_status_id}}
+    end
+  }
   
   def create_issue(hr_candidate)
     Issue.create(
