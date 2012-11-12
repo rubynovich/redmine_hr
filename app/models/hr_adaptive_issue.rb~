@@ -16,9 +16,9 @@ class HrAdaptiveIssue < ActiveRecord::Base
   cattr_accessor :due_date_variants, :start_date_variants
   
   if Rails::VERSION::MAJOR >= 3 
-    scope :on_status, lambda{ |hr_status_id|
+    named_scope :on_status, lambda{ |hr_status_id|
       if hr_status_id.present?
-        where(:hr_status_id => hr_status_id)
+        {:conditions => {:hr_status_id => hr_status_id}}
       end
     }
   else
