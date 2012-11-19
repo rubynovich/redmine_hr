@@ -1,5 +1,6 @@
 .contextual
   = link_to l(:button_add), {:action => 'new'}, :class => 'icon icon-add'
+  = link_to l(:button_copy), {:action => 'new', :hr_adaptive_issue => @hr_adaptive_issue.to_hash}, :class => 'icon icon-copy'
   = link_to l(:button_update), {:action => 'edit', :id => @hr_adaptive_issue.id}, :class => 'icon icon-edit'
   = link_to l(:button_delete), hr_adaptive_issue_path(@hr_adaptive_issue), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
 

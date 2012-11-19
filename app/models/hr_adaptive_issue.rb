@@ -57,4 +57,11 @@ class HrAdaptiveIssue < ActiveRecord::Base
   def to_s
     subject
   end
+  
+  def to_hash
+    self.class.column_names.
+      inject({}) { |result, name| 
+        result.merge name => self.send(name)
+      }
+  end  
 end

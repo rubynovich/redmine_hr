@@ -1,14 +1,14 @@
 class HrAdaptiveIssuesController < ApplicationController
   unloadable
   before_filter :require_hr
-  before_filter :find_object, :only => [:edit, :show, :destroy, :update]
+  before_filter :find_adaptive_issue, :only => [:edit, :show, :destroy, :update]
+  before_filter :new_adaptive_issue, :only => [:new, :create]
 
   def index
     @hr_adaptive_issues = HrAdaptiveIssue.all
   end
   
-  def new
-    @hr_adaptive_issue = HrAdaptiveIssue.new
+  def new    
   end
   
   def edit
@@ -18,7 +18,6 @@ class HrAdaptiveIssuesController < ApplicationController
   end
     
   def create
-    @hr_adaptive_issue = HrAdaptiveIssue.new params[:hr_adaptive_issue]
     if @hr_adaptive_issue.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to :action => 'index'
@@ -46,8 +45,11 @@ class HrAdaptiveIssuesController < ApplicationController
 
 
   private
-  
-    def find_object
+    def new_adaptive_issue
+      @hr_adaptive_issue = HrAdaptiveIssue.new params[:hr_adaptive_issue]    
+    end
+    
+    def find_adaptive_issue
       @hr_adaptive_issue = HrAdaptiveIssue.find(params[:id])    
     end
   
