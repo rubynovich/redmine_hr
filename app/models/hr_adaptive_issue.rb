@@ -45,12 +45,18 @@ class HrAdaptiveIssue < ActiveRecord::Base
   
   def create_date(str, fwd)
     case str
-      when "now": Date.today
-      when "1d_fwd": fwd - 1.day
-      when "fwd": fwd
-      when "fwd_2w": fwd + 1.week
-      when "fwd_1m": fwd + 1.month
-      when "fwd_3m": fwd + 2.months + 2.weeks
+      when "now"
+        Date.today
+      when "1d_fwd"
+        fwd - 1.day
+      when "fwd"
+        fwd
+      when "fwd_2w"
+        fwd + 1.week
+      when "fwd_1m"
+        fwd + 1.month
+      when "fwd_3m"
+        fwd + 2.months + 2.weeks
     end
   end
   
