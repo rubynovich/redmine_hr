@@ -29,7 +29,7 @@ class HrCandidate < ActiveRecord::Base
       end
     }
     
-    scope :like_phone, lambda {|q|
+    scope :like_field, lambda {|q|
       if q.present?
         {:conditions => 
           ["phone LIKE :p", 
@@ -110,7 +110,7 @@ class HrCandidate < ActiveRecord::Base
       end
     }
     
-    named_scope :like_phone, lambda {|q|
+    named_scope :like_field, lambda {|q|
       if q.present?
         {:conditions => 
           ["phone LIKE :p", 

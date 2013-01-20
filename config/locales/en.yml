@@ -25,6 +25,7 @@ en:
   label_next_month: "next month"
   
   field_phone: "Telephone Number"
+  field_email: "Email"
   field_birth_date: "Birth Date"
   field_to_do: "ToDo"
   field_done: "Done"

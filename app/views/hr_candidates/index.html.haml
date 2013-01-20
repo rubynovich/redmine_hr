@@ -12,6 +12,7 @@
         = sort_header_tag 'name', :caption => l(:field_hr_candidate_fullname)
         = sort_header_tag 'birth_date', :caption => l(:field_birth_date)
         = sort_header_tag 'phone', :caption => l(:field_phone)
+        = sort_header_tag 'email', :caption => l(:field_email)
         = sort_header_tag 'hr_job_id', :caption => l(:field_hr_job)
         = sort_header_tag 'hr_status_id', :caption => l(:field_hr_status)
         = sort_header_tag 'due_date', :caption => l(:field_due_date)
@@ -28,6 +29,9 @@
           %td{:align=>"center"}
             - if hr_candidate.phone.present?
               = link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
+          %td{:align=>"center"}
+            - if hr_candidate.email.present?
+              = mail_to hr_candidate.email
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
           %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)

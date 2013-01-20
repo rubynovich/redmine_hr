@@ -31,6 +31,7 @@ ru:
   label_next_month: "следующий месяц"
   
   field_phone: "Контактный телефон"
+  field_email: "Электронная почта"
   field_birth_date: "Дата рождения"
   field_hr_candidate_fullname: "ФИО кандидата"
   field_hr_job: "Вакансия"

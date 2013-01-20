@@ -17,8 +17,8 @@
     %tr    
       %th.phone= l(:field_phone)+":"
       %td.phone= h(@hr_candidate.phone)
-      %th.hr_status= l(:field_hr_status)+":"
-      %td.hr_status= link_to h(@hr_candidate.hr_status), hr_status_path(@hr_candidate.hr_status)
+      %th.email= l(:field_email)+":"
+      %td.email= h(@hr_candidate.email)
     %tr
       %th.birth_date= l(:field_birth_date)+":"
       %td.birth_date= format_date(@hr_candidate.birth_date)
@@ -29,6 +29,9 @@
       %td.updated_on= format_date(@hr_candidate.updated_on)
       %th.created_on= l(:field_created_on)+":"
       %td.created_on= format_date(@hr_candidate.created_on)
+    %tr
+      %th.hr_status= l(:field_hr_status)+":"
+      %td.hr_status= link_to h(@hr_candidate.hr_status), hr_status_path(@hr_candidate.hr_status)
       
   %hr
   %p

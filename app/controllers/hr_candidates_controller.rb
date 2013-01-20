@@ -10,13 +10,14 @@ class HrCandidatesController < ApplicationController
   # GET /hr_candidates/
   def index
     sort_init 'due_date', 'desc'
-    sort_update %w(name birth_date phone hr_status_id hr_job_id due_date updated_on created_on)
+    sort_update %w(name birth_date phone email hr_status_id hr_job_id due_date updated_on created_on)
     
     @limit = per_page_option
     
     scope = HrCandidate.
       like_name(params[:name]).
-      like_phone(params[:phone]).
+      like_field(params[:phone]).
+      like_field(params[:email]).
       eql_hr_job_id(params[:hr_job_id]).
       eql_hr_status_id(params[:hr_status_id]).
       eql_birth_date(params[:birth_date]).
