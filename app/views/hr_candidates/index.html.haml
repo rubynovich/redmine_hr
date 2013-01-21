@@ -46,17 +46,4 @@
   %p.nodata
     = l(:label_no_data)
 
-- form_tag({}, :method => :get) do
-  %fieldset
-    %legend= l(:label_filter_plural)
-            
-    %label{:for=>'name'}= l(:field_hr_candidate_fullname) + ":"
-    = text_field_tag 'name', params[:name], :size => 30
-    
-    %label{:for=>'phone'}= l(:field_phone) + ":"
-    = text_field_tag 'phone', params[:phone], :size => 10
-    
-    = submit_tag l(:button_apply), :class => "small", :name => nil
-    = link_to l(:button_clear), hr_candidates_path, :class => 'icon icon-reload'
-
 - html_title(l(:label_hr_status_plural))
