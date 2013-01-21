@@ -56,7 +56,7 @@ class HrCandidatesController < ApplicationController
     if request.post? && @hr_candidate.save
       render_attachment_warning_if_needed(@hr_candidate)    
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index'
+      redirect_back_or_default :action => 'index'
     else
       render :action => 'new'
     end
@@ -67,14 +67,12 @@ class HrCandidatesController < ApplicationController
     @hr_candidate = HrCandidate.find(params[:id])    
     @hr_candidate.init_hr_change(params[:notes])    
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))        
-    respond_to do |format|
-      if @hr_candidate.update_attributes(params[:hr_candidate])
-        render_attachment_warning_if_needed(@hr_candidate)          
-        flash[:notice] = l(:notice_successful_update)
-        format.html { redirect_to(hr_candidate_path(@hr_candidate)) }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @hr_candidate.update_attributes(params[:hr_candidate])
+      render_attachment_warning_if_needed(@hr_candidate)          
+      flash[:notice] = l(:notice_successful_update)
+      redirect_to(hr_candidate_path(@hr_candidate))
+    else
+      render :action => "edit"
     end
   end
   
