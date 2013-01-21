@@ -29,9 +29,7 @@
           %td{:align=>"center"}
             - if hr_candidate.phone.present?
               = link_to(h(hr_candidate.phone), :phone => hr_candidate.phone)
-          %td{:align=>"center"}
-            - if hr_candidate.email.present?
-              = mail_to hr_candidate.email
+          %td{:align=>"center"}= mail_to hr_candidate.email
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
           %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)

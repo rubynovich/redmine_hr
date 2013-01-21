@@ -5,7 +5,7 @@ class HrAdaptiveIssuesController < ApplicationController
   before_filter :new_adaptive_issue, :only => [:new, :create]
 
   def index
-    @hr_adaptive_issues = HrAdaptiveIssue.all
+    @hr_adaptive_issues = HrAdaptiveIssue.all(:order => 'hr_status_id')
   end
   
   def new    
