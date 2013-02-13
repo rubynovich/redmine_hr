@@ -1,9 +1,9 @@
 %fieldset
   %legend= l(:label_filter_plural)
 
-  - form_tag({}, :method => :get) do
+  %form{:method => :get}
     = hidden_field_tag :time_period, params[:time_period]
-    
+
     %label{:for=>'hr_job_id'}= l(:field_hr_job) + ":"
     %select{:id => 'hr_job_id', :name => 'hr_job_id', :class => "small", :onchange => "this.form.submit(); return false;"}
       %option
@@ -15,8 +15,8 @@
         - else
           %option{:value => hr_job.id}
             = hr_job.name
-            = "(#{hr_job.hr_candidates.count})"            
-            
+            = "(#{hr_job.hr_candidates.count})"
+
     %label{:for=>'hr_status_id'}= l(:field_hr_status) + ":"
     %select{:id => 'hr_status_id', :name => 'hr_status_id', :class => "small", :onchange => "this.form.submit(); return false;"}
       %option
@@ -30,7 +30,7 @@
             = hr_status.name
             = "(#{hr_status.hr_candidates.count})"
     %br
-    
+
     %label=l(:field_due_date) + ":"
     - %w{all yesterday today tomorrow this_week next_week this_month next_month}.each do |key|
       - if params[:time_period] == key
@@ -42,15 +42,15 @@
 
     %br
 
-  - form_tag({}, :method => :get) do            
+  %form{:method => :get}
     %label{:for=>'name'}= l(:field_hr_candidate_fullname) + ":"
     = text_field_tag 'name', params[:name], :size => 30
-    
+
     %label{:for=>'phone'}= l(:field_phone) + ":"
     = text_field_tag 'phone', params[:phone], :size => 10
-    
+
     %label{:for=>'email'}= l(:field_email) + ":"
     = text_field_tag 'email', params[:email], :size => 10
-    
+
     = submit_tag l(:button_apply), :class => "small", :name => nil
     = link_to l(:button_clear), hr_candidates_path, :class => 'icon icon-reload'

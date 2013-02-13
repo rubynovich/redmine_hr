@@ -20,12 +20,12 @@
   #tab-content-users
     - users = User.not_hr.all
     - if users.any?
-      - form_for :hr_member, :html => {:class => :edit_group} do |f|
+      - form = form_for :hr_member, :html => {:class => :edit_group} do |f|
         %fieldset
           %legend
             =l(:label_user_new)
           #users
             = principals_check_box_tags 'user_ids[]', users
 
-          %p= submit_tag l(:button_add)  
-
+          %p= submit_tag l(:button_add)
+      = form if Rails::VERSION::MAJOR < 3

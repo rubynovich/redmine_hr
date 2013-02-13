@@ -1,7 +1,8 @@
 %h2= l(:label_new_hr_candidate)
 
-- labelled_form_for @hr_candidate, :url => hr_candidates_path, :html => { :id => 'hr_candidate-form', :multipart => true} do |f|
+- form = labelled_form_for @hr_candidate, :url => hr_candidates_path, :html => { :id => 'hr_candidate-form', :multipart => true} do |f|
   = render :partial => 'form', :locals => { :f => f }
   = f.hidden_field :author_id
   = submit_tag l(:button_create)
   = submit_tag l(:button_create_and_continue), :name => 'continue'
+= form if Rails::VERSION::MAJOR < 3 

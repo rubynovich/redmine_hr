@@ -4,7 +4,7 @@ if Rails::VERSION::MAJOR >= 3
     resources :hr_candidates
     resources :hr_statuses
     resources :hr_adaptive_issues
-    resources :hr_members, :member => {:autocomplete_for_user => :get}
+    resources :hr_members
   end
 else
   ActionController::Routing::Routes.draw do |map|
@@ -12,6 +12,6 @@ else
     map.resources :hr_candidates
     map.resources :hr_statuses
     map.resources :hr_adaptive_issues
-    map.resources :hr_members, :member => {:autocomplete_for_user => :get}  
+    map.resources :hr_members
   end
 end

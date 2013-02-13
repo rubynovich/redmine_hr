@@ -1,9 +1,9 @@
 %h2
   = link_to l(:label_hr_job_plural), hr_jobs_path
-  &#187; 
+  &#187;
   =h @hr_job
 
-- labelled_form_for @hr_job do |f|
+- form = labelled_form_for @hr_job do |f|
   = render :partial => 'form', :locals => {:f => f}
   = submit_tag l(:button_save)
-
+= form if Rails::VERSION::MAJOR < 3

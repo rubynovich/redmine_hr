@@ -1,6 +1,6 @@
 %h2= l(:label_edit_hr_candidate)
 
-- labelled_form_for @hr_candidate, :html => { :id => 'hr_candidate-form', :multipart => true, :method => :put} do |f|
+- form = labelled_form_for @hr_candidate, :html => { :id => 'hr_candidate-form', :multipart => true, :method => :put} do |f|
   = render :partial => 'form', :locals => { :f => f }
   .box
     %fieldset
@@ -8,6 +8,7 @@
       %p= text_area_tag :notes, nil, :cols => 60, :rows => 5, :class => 'wiki-edit'
     = wikitoolbar_for 'notes'
   = submit_tag l(:button_save)
+= form if Rails::VERSION::MAJOR < 3
 
 #history
   %h3=l(:label_history)
