@@ -5,4 +5,4 @@
   = f.hidden_field :author_id
   = submit_tag l(:button_create)
   = submit_tag l(:button_create_and_continue), :name => 'continue'
-= form if Rails::VERSION::MAJOR < 3 
+= form if Rails::VERSION::MAJOR >= 3 

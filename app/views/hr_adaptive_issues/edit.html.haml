@@ -6,4 +6,4 @@
 - form = labelled_form_for @hr_adaptive_issue do |f|
   = render :partial => 'form', :locals => {:f => f}
   = submit_tag l(:button_save)
-= form if Rails::VERSION::MAJOR < 3
+= form if Rails::VERSION::MAJOR >= 3

@@ -22,10 +22,6 @@ class HrCandidatesController < ApplicationController
       eql_field(params[:hr_status_id], :hr_status_id).
       eql_field(params[:birth_date], :birth_date).
       eql_field(params[:due_date], :due_date).
-#      eql_hr_job_id(params[:hr_job_id]).
-#      eql_hr_status_id(params[:hr_status_id]).
-#      eql_birth_date(params[:birth_date]).
-#      eql_due_date(params[:due_date]).
       period_time_period(params[:time_period])
 
     @hr_candidate_count = scope.count

@@ -28,4 +28,4 @@
             = principals_check_box_tags 'user_ids[]', users
 
           %p= submit_tag l(:button_add)
-      = form if Rails::VERSION::MAJOR < 3
+      = form if Rails::VERSION::MAJOR >= 3

@@ -43,31 +43,6 @@ class HrCandidate < ActiveRecord::Base
       end
     }
 
-    # FIXME -> eql_field
-#    scope :eql_hr_job_id, lambda {|q|
-#      if q.present?
-#        where(:hr_job_id => q)
-#      end
-#    }
-#
-#    scope :eql_hr_status_id, lambda {|q|
-#      if q.present?
-#        where(:hr_status_id => q)
-#      end
-#    }
-#
-#    scope :eql_due_date, lambda {|q|
-#      if q.present?
-#        where(:due_date => q)
-#      end
-#    }
-
-#    scope :eql_birth_date, lambda {|q|
-#      if q.present?
-#        where(:birth_date => q)
-#      end
-#    }
-
     scope :period_time_period, lambda {|q|
       today = Date.today
       if q.present?
@@ -120,34 +95,9 @@ class HrCandidate < ActiveRecord::Base
 
     named_scope :eql_field, lambda {|q, field|
       if q.present? && field.present?
-        where(field => q)
+        {:conditions => {field => q}}
       end
     }
-
-    # FIXME -> eql_field
-#    named_scope :eql_hr_job_id, lambda {|q|
-#      if q.present?
-#        {:conditions => {:hr_job_id => q}}
-#      end
-#    }
-
-#    named_scope :eql_hr_status_id, lambda {|q|
-#      if q.present?
-#        {:conditions => {:hr_status_id => q}}
-#      end
-#    }
-
-#    named_scope :eql_due_date, lambda {|q|
-#      if q.present?
-#        {:conditions => {:due_date => q}}
-#      end
-#    }
-
-#    named_scope :eql_birth_date, lambda {|q|
-#      if q.present?
-#        {:conditions => {:birth_date => q}}
-#      end
-#    }
 
     named_scope :period_time_period, lambda {|q|
       today = Date.today

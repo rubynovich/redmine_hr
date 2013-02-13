@@ -3,7 +3,7 @@ require 'redmine'
 Redmine::Plugin.register :redmine_hr do
   name 'HR'
   author 'Roman Shipiev'
-  description 'Автоматизирует процесс собеседования, найма и адаптации новых сотрудников. Адаптационный лист позволяет создавать задачи при смене статуса. Создание задачи может быть привязано к любому статусу. К каждому статусу можно привязать неограниченное количество задач.'
+  description 'Plugin automates the interview, hire and adaptation of new employees'
   version '0.2.4'
   url 'http://github.com/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'

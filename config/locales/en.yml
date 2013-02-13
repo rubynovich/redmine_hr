@@ -1,7 +1,7 @@
 # English strings go here for Rails i18n
 en:
   label_hr_member_plural: "HR-managers"
-  
+
   label_hr_status: "Approval status"
   label_hr_status_plural: "Approval statuses"
   label_hr_status_new: "Add new Approval Status"
@@ -20,22 +20,41 @@ en:
   label_new_hr_candidate: "New Candidate"
   label_edit_hr_candidate: "Edit Candidate Information"
 
+  label_hr_adaptive_issue: "Adaptation issue"
+  label_hr_adaptive_issue_plural: "Adaptation list"
+  label_hr_adaptive_issue_new: "Add adaptation issue"
+  label_new_hr_adaptive_issue: "New adaptation issue"
+  label_edit_hr_adaptive_issue: "Edit adaptation issue"
+
   label_tomorrow: "tomorrow"
   label_next_week: "next week"
   label_next_month: "next month"
-  
+
   field_phone: "Telephone Number"
   field_email: "Email"
   field_birth_date: "Birth Date"
-  field_to_do: "ToDo"
-  field_done: "Done"
   field_hr_candidate_fullname: "Candidate Fullname"
   field_hr_job: "Job"
   field_hr_status: "Approval Status"
-  
+  field_hr_adaptive_issue: "Adaptation issue"
+
   error_unable_delete_hr_candidate: "Unable delete the Candidate"
   error_unable_delete_hr_job: "Unable delete the Job"
-  error_unable_delete_hr_status: "Unable delete the Approval Status" 
+  error_unable_delete_hr_status: "Unable delete the Approval Status"
+  error_unable_delete_hr_adaptive_issue: "Unable delete the Adaptation Issue"
+
+  message_incorrect_format_phone: "is incorrect format. It must consist of 10 digits"
+  message_about_hr_candidate: "New employee %{name} (%{job}) will start work %{fwd}"
+  list_adaptive_issue_date_variants:
+    now: "Date change status"
+    1d_fwd: "1 day before Due date"
+    fwd: "Due date"
+    fwd_2w: "2 weeks after Due date"
+    fwd_1m: "1 month after Due date"
+    fwd_3m: "2.5 month after Due date"
+
+  prompt_please_select: "Please select"
+
   activerecord:
     errors:
       models:

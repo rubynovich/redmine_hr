@@ -6,4 +6,4 @@
 - form = labelled_form_for @hr_job do |f|
   = render :partial => 'form', :locals => {:f => f}
   = submit_tag l(:button_create)
-= form if Rails::VERSION::MAJOR < 3
+= form if Rails::VERSION::MAJOR >= 3
