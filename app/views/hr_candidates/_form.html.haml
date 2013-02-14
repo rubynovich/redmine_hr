@@ -8,12 +8,12 @@
       = calendar_for('hr_candidate_birth_date')
     %p
       = f.select :hr_status_id, HrStatus.all(:order => "position").map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
-      = link_to "&nbsp;", {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
+      = link_to h(""), {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
 
   .splitcontentright
     %p
       = f.select :hr_job_id, HrJob.all.map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
-      = link_to "&nbsp;", {:controller => :hr_jobs, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
+      = link_to h(""), {:controller => :hr_jobs, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
     %p= f.text_field :email, :size => 20
     %p
       = f.text_field :due_date, :size => 10, :required => true
