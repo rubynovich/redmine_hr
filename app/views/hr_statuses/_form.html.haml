@@ -1,6 +1,7 @@
 = error_messages_for 'hr_status'
 
 .box.tabular
+  = hidden_field_tag :back_url, params[:back_url]
   %p= f.text_field :name, :required => true
   %p= f.check_box :is_default
   %p= f.check_box :is_closed

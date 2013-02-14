@@ -6,20 +6,19 @@ class HrStatusesController < ApplicationController
   # GET /hr_statuses/
   def index
     @hr_status_pages, @hr_statuses = paginate :hr_statuses, :per_page => 25, :order => "position"
-    render :action => "index", :layout => false if request.xhr?
   end
 
   # GET /hr_statuses/new
   def new
     @hr_status = HrStatus.new
   end
-  
+
   # POST /hr_statuses
   def create
     @hr_status = HrStatus.new(params[:hr_status])
-    if request.post? && @hr_status.save
+    if @hr_status.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index'
+      redirect_back_or_default :action => 'index'
     else
       render :action => 'new'
     end
@@ -29,48 +28,31 @@ class HrStatusesController < ApplicationController
   def edit
     @hr_status = HrStatus.find(params[:id])
   end
-  
+
   # GET /hr_statuses/1
   def show
     @hr_status = HrStatus.find(params[:id])
     @hr_candidate_pages, @hr_candidates = paginate :hr_candidates, :per_page => 25, :order => "due_date DESC", :conditions => ["hr_status_id=?", @hr_status.id]
-  end  
-  
-
-  # POST /hr_statuses
-  def create
-    @hr_status = HrStatus.new(params[:hr_status])
-    if request.post? && @hr_status.save
-      flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index'
-    else
-      render :action => 'new'
-    end
   end
 
   # PUT /hr_statuses/1
   def update
     @hr_status = HrStatus.find(params[:id])
 
-    respond_to do |format|
-      if @hr_status.update_attributes(params[:hr_status])
-        flash[:notice] = l(:notice_successful_update)
-        format.html { redirect_to(hr_statuses_path) }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @hr_status.update_attributes(params[:hr_status])
+      flash[:notice] = l(:notice_successful_update)
+      redirect_back_or_default :action => :index
+    else
+      render :action => "edit"
     end
   end
-  
+
   # DELETE /hr_statuses/1
   def destroy
-    HrStatus.find(params[:id]).destroy
-    redirect_to :action => 'index'
-  rescue
-    flash[:error] = l(:error_unable_delete_hr_status)
-    redirect_to :action => 'index'
-  end  
-  
+    HrStatus.find(params[:id]).destroy rescue flash[:error] = l(:error_unable_delete_hr_status)
+    redirect_back_or_default :action => 'index'
+  end
+
   private
     def require_hr
       (render_403; return false) unless User.current.is_hr?

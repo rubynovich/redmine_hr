@@ -6,10 +6,14 @@
     %p
       = f.text_field :birth_date, :size => 10
       = calendar_for('hr_candidate_birth_date')
-    %p= f.select :hr_status_id, HrStatus.all(:order => "position").map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)    
-    
+    %p
+      = f.select :hr_status_id, HrStatus.all(:order => "position").map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
+      = link_to "", {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
+
   .splitcontentright
-    %p= f.select :hr_job_id, HrJob.all.map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
+    %p
+      = f.select :hr_job_id, HrJob.all.map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
+      = link_to "", {:controller => :hr_jobs, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
     %p= f.text_field :email, :size => 20
     %p
       = f.text_field :due_date, :size => 10, :required => true
@@ -18,9 +22,9 @@
   %div{:style=>"clear:both"}
 
   %p= f.text_area :description, :cols => 60, :rows => 15, :class => 'wiki-edit'
-  = link_to_attachments @hr_candidate if @hr_candidate.attachments.any? 
+  = link_to_attachments @hr_candidate if @hr_candidate.attachments.any?
   %p#attachments_form
     = label_tag('attachments[1][file]', l(:label_attachment_plural))
-    = render :partial => 'attachments/form', :locals => {:container => @hr_candidate}  
+    = render :partial => 'attachments/form', :locals => {:container => @hr_candidate}
 
 = wikitoolbar_for 'hr_candidate_description'
