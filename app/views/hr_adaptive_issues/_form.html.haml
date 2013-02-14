@@ -12,7 +12,7 @@
   .splitcontentright
     %p
       = f.select :hr_status_id, HrStatus.all(:order => :position).collect{|s| [s.name, s.id] }, :required => true, :size => 10
-      = link_to " ", {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
+      = link_to l(:label_hr_statuse_new), {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
 
     %p= f.select :due_date, HrAdaptiveIssue.due_date_variants.collect{|s| [t(s, :scope => 'list_adaptive_issue_date_variants'), s]}, :required => true, :size => 10
     %p= f.select :assigned_to_id, User.active.all(:order => "lastname, firstname").collect{|t| [[t.lastname,t.firstname].join(" "), t.id]}, :required => true, :size => 10
