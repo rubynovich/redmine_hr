@@ -1,6 +1,8 @@
 class HrCandidatesController < ApplicationController
   unloadable
   before_filter :require_hr
+  before_filter :find_hr_candidate, :only => [:edit, :update, :show, :destroy]
+  before_filter :new_hr_candidate, :only => [:new, :create]
 
   helper :attachments
   include AttachmentsHelper
@@ -35,23 +37,20 @@ class HrCandidatesController < ApplicationController
 
   # GET /hr_candidates/new
   def new
-    @hr_candidate = HrCandidate.new({:hr_status => HrStatus.default, :author_id =>  User.current.id}.merge(params[:hr_candidate]))
+    @hr_candidate.hr_status = HrStatus.default
   end
 
   # GET /hr_candidates/1/edit
   def edit
-    @hr_candidate = HrCandidate.find(params[:id])
   end
 
   # GET /hr_candidates/1
   def show
-    @hr_candidate = HrCandidate.find(params[:id])
     @hr_changes = @hr_candidate.hr_changes.find(:all, :order => "created_on DESC")
   end
 
   # POST /hr_candidates
   def create
-    @hr_candidate = HrCandidate.new(params[:hr_candidate])
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
     if request.post? && @hr_candidate.save
       render_attachment_warning_if_needed(@hr_candidate)
@@ -64,7 +63,6 @@ class HrCandidatesController < ApplicationController
 
   # PUT /hr_candidates/1
   def update
-    @hr_candidate = HrCandidate.find(params[:id])
     @hr_candidate.init_hr_change(params[:notes])
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
     if @hr_candidate.update_attributes(params[:hr_candidate])
@@ -78,7 +76,7 @@ class HrCandidatesController < ApplicationController
 
   # DELETE /hr_candidates/1
   def destroy
-    HrCandidate.find(params[:id]).destroy
+    @hr_candidate.destroy
     redirect_to :action => 'index'
   rescue
     flash[:error] = l(:error_unable_delete_hr_candidate)
@@ -86,6 +84,14 @@ class HrCandidatesController < ApplicationController
   end
 
   private
+    def new_hr_candidate
+      @hr_candidate = HrCandidate.new(params[:hr_candidate])
+    end
+
+    def find_hr_candidate
+      @hr_candidate = HrCandidate.find(params[:id])
+    end
+
     def require_hr
       (render_403; return false) unless User.current.is_hr?
     end

@@ -19,6 +19,7 @@ class HrCandidate < ActiveRecord::Base
   has_many :hr_changes, :dependent => :destroy
 
   after_update :save_hr_change
+  before_create :add_author
 
   if Rails::VERSION::MAJOR >= 3
     scope :like_name, lambda {|q|
@@ -154,6 +155,10 @@ class HrCandidate < ActiveRecord::Base
     # Make sure updated_on is updated when adding a note.
     updated_on_will_change!
     @current_hr_change
+  end
+
+  def add_author
+    self.author = User.current
   end
 
   def save_hr_change
