@@ -35,7 +35,7 @@ class HrCandidatesController < ApplicationController
 
   # GET /hr_candidates/new
   def new
-    @hr_candidate = HrCandidate.new(:hr_status => HrStatus.default, :author_id =>  User.current.id)
+    @hr_candidate = HrCandidate.new({:hr_status => HrStatus.default, :author_id =>  User.current.id}.merge(params[:hr_candidate]))
   end
 
   # GET /hr_candidates/1/edit
