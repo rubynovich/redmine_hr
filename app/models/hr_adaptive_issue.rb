@@ -10,7 +10,7 @@ class HrAdaptiveIssue < ActiveRecord::Base
   validates_presence_of :project_id, :tracker_id, :assigned_to_id,
     :priority_id, :subject, :start_date, :due_date, :hr_status_id
 
-  @@start_date_variants = ["now", "fwd"]
+  @@start_date_variants = ["now", "fwd", "fwd_2w", "fwd_1m", "fwd_3m"]
   @@due_date_variants   = ["1d_fwd", "fwd", "fwd_2w", "fwd_1m", "fwd_3m"]
 
   cattr_accessor :due_date_variants, :start_date_variants
