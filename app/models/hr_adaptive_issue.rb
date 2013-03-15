@@ -52,7 +52,7 @@ class HrAdaptiveIssue < ActiveRecord::Base
       when "fwd"
         fwd
       when "fwd_2w"
-        fwd + 1.week
+        fwd + 2.weeks
       when "fwd_1m"
         fwd + 1.month
       when "fwd_3m"
