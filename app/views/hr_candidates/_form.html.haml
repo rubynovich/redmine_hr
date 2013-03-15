@@ -12,7 +12,7 @@
 
   .splitcontentright
     %p
-      = f.select :hr_job_id, HrJob.all.map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
+      = f.select :hr_job_id, HrJob.all(:order => :name).map {|c| [c.name, c.id]}, :required => true, :prompt => t(:prompt_please_select)
       = link_to l(:label_hr_job_new), {:controller => :hr_jobs, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'
     %p= f.text_field :email, :size => 20
     %p
