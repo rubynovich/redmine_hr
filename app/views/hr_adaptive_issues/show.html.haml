@@ -6,36 +6,38 @@
 
 %h2
   = link_to l(:label_hr_adaptive_issue_plural), hr_adaptive_issues_path
-  &#187; 
+  &#187;
   =h @hr_adaptive_issue
 
 
-.issue.details  
+.issue.details
   %table.attributes
     %tr
       %th=l(:field_project)+":"
-      %td{:colspan => 3}= @hr_adaptive_issue.project
+      %td= link_to_project @hr_adaptive_issue.project
+      %th=l(:field_hours)+":"
+      %td= h(@hr_adaptive_issue.hours)
     %tr
       %th=l(:field_tracker)+":"
-      %td= @hr_adaptive_issue.tracker      
+      %td= @hr_adaptive_issue.tracker
       %th=l(:field_hr_status)+":"
-      %td= @hr_adaptive_issue.hr_status      
+      %td= @hr_adaptive_issue.hr_status
     %tr
       %th= l(:field_start_date)+":"
       %td= t(@hr_adaptive_issue.start_date, :scope => :list_adaptive_issue_date_variants)
       %th= l(:field_due_date)+":"
-      %td= t(@hr_adaptive_issue.due_date, :scope => :list_adaptive_issue_date_variants)      
-    %tr    
+      %td= t(@hr_adaptive_issue.due_date, :scope => :list_adaptive_issue_date_variants)
+    %tr
       %th= l(:field_assigned_to)+":"
-      %td= h(@hr_adaptive_issue.assigned_to)
+      %td= link_to_user @hr_adaptive_issue.assigned_to
       %th= l(:field_priority)+":"
       %td= h(@hr_adaptive_issue.priority)
-    %tr    
+    %tr
       %th= l(:field_created_on)+":"
       %td= format_date(@hr_adaptive_issue.created_on)
       %th= l(:field_updated_on)+":"
-      %td= format_date(@hr_adaptive_issue.updated_on)      
-          
+      %td= format_date(@hr_adaptive_issue.updated_on)
+
   - if @hr_adaptive_issue.description?
     %hr
     - if @hr_adaptive_issue.description?

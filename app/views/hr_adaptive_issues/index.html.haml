@@ -14,6 +14,7 @@
         %th=l(:field_start_date)
         %th=l(:field_due_date)
         %th=l(:field_assigned_to)
+        %th=l(:field_hours)
         %th
     %tbody
       - @hr_adaptive_issues.each_with_index do |hr_adaptive_issue, index|
@@ -25,6 +26,7 @@
           %td= t(hr_adaptive_issue.start_date, :scope => :list_adaptive_issue_date_variants)
           %td= t(hr_adaptive_issue.due_date, :scope => :list_adaptive_issue_date_variants)
           %td= link_to_user hr_adaptive_issue.assigned_to
+          %td= h(hr_adaptive_issue.hours)
           %td.buttons
             = link_to l(:button_copy), {:action => :new, :hr_adaptive_issue => hr_adaptive_issue.to_hash}, :class => 'icon icon-copy'
             = link_to l(:button_update), {:action => 'edit', :id => hr_adaptive_issue.id}, :class => 'icon icon-edit'

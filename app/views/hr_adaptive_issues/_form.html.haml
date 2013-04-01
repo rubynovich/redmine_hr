@@ -1,15 +1,16 @@
 = error_messages_for @hr_adaptive_issue
 .box.tabular
-  %p= f.text_field :subject, :size => 80, :required => true
-  %p= f.select :project_id, Project.visible.collect {|t| [t.name, t.id]}, :required => true
+  %p= f.text_field :subject, :size => 60, :required => true
 
   .splitcontentleft
+    %p= f.select :project_id, project_tree_options_for_select_with_tranc(Project.visible), :required => true
     %p= f.select :tracker_id, Tracker.all.collect {|t| [t.name, t.id]}, :required => true, :size => 10
 
     %p= f.select :start_date, HrAdaptiveIssue.start_date_variants.collect{|s| [t(s, :scope => 'list_adaptive_issue_date_variants'), s]}, :required => true, :size => 10
     %p= f.select :priority_id, IssuePriority.all.collect{|t| [t.name, t.id]}, :required => true, :size => 10
 
   .splitcontentright
+    %p= f.text_field :hours, :required => true, :size => 5, :value => "0.0"
     %p
       = f.select :hr_status_id, HrStatus.all(:order => :position).collect{|s| [s.name, s.id] }, :required => true, :size => 10
       = link_to l(:label_hr_status_new), {:controller => :hr_statuses, :action => :new, :back_url => url_for(params)}, :class => 'icon icon-add'

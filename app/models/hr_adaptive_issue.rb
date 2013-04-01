@@ -30,7 +30,7 @@ class HrAdaptiveIssue < ActiveRecord::Base
   end
 
   def create_issue(hr_candidate)
-    Issue.create(
+    issue = Issue.create(
       :status => IssueStatus.default,
       :tracker => self.tracker,
       :subject => [self.subject, hr_candidate.name].join(", "),
@@ -40,7 +40,18 @@ class HrAdaptiveIssue < ActiveRecord::Base
       :start_date => create_date(self.start_date, hr_candidate.due_date),
       :due_date => create_date(self.due_date, hr_candidate.due_date),
       :priority => self.priority,
-      :assigned_to => self.assigned_to)
+      :assigned_to => self.assigned_to,
+      :estimated_hours => self.hours
+      )
+    if Redmine::Plugin.find(:redmine_planning)
+      EstimatedTime.create(
+            :issue => issue,
+            :plan_on => issue.due_date,
+            :user => issue.author,
+            :comments => issue.subject,
+            :hours => issue.estimated_hours)
+    end
+    issue
   end
 
   def create_date(str, fwd)

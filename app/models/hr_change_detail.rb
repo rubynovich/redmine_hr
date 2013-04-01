@@ -28,5 +28,5 @@ class HrChangeDetail < ActiveRecord::Base
       v
     end
   end
-  
+
 end
