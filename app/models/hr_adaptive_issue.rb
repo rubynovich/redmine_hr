@@ -41,9 +41,9 @@ class HrAdaptiveIssue < ActiveRecord::Base
       :due_date => create_date(self.due_date, hr_candidate.due_date),
       :priority => self.priority,
       :assigned_to => self.assigned_to,
-      :estimated_hours => self.hours
+      :estimated_hours => self.estimated_hours
       )
-    if Redmine::Plugin.find(:redmine_planning)
+    if issue && Redmine::Plugin.find(:redmine_planning)
       EstimatedTime.create(
             :issue => issue,
             :plan_on => issue.due_date,
