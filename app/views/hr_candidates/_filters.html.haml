@@ -29,6 +29,20 @@
           %option{:value => hr_status.id}
             = hr_status.name
             = "(#{hr_status.hr_candidates.count})"
+
+    %label{:for=>'author_id'}= l(:field_author) + ":"
+    %select{:id => 'author_id', :name => 'author_id', :class => "small", :onchange => "this.form.submit(); return false;"}
+      %option
+      - HrMember.all.map(&:user).sort_by(&:name).each do |user|
+        - if params[:author_id].to_i == user.id
+          %option{:value => user.id, :selected => "selected"}
+            = user.name
+            = "(#{HrCandidate.where(:author_id => user.id).count})"
+        - else
+          %option{:value => user.id}
+            = user.name
+            = "(#{HrCandidate.where(:author_id => user.id).count})"
+
     %br
 
     %label=l(:field_due_date) + ":"

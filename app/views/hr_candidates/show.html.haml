@@ -14,7 +14,7 @@
       %td.name= h(@hr_candidate.name)
       %th.hr_job= l(:field_hr_job)+":"
       %td.hr_job= link_to h(@hr_candidate.hr_job), hr_job_path(@hr_candidate.hr_job)
-    %tr    
+    %tr
       %th.phone= l(:field_phone)+":"
       %td.phone= h(@hr_candidate.phone)
       %th.email= l(:field_email)+":"
@@ -32,7 +32,9 @@
     %tr
       %th.hr_status= l(:field_hr_status)+":"
       %td.hr_status= link_to h(@hr_candidate.hr_status), hr_status_path(@hr_candidate.hr_status)
-      
+      %th.author= l(:field_author)+":"
+      %td.author= link_to_user @hr_candidate.author
+
   %hr
   %p
     %strong= l(:field_description)
