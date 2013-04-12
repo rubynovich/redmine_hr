@@ -34,7 +34,7 @@
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_job), :hr_job_id => hr_candidate.hr_job_id)
           %td{:align=>"center"}= link_to(h(hr_candidate.hr_status), :hr_status_id => hr_candidate.hr_status_id)
           %td{:align=>"center"}= link_to(format_date(hr_candidate.due_date), :due_date => hr_candidate.due_date)
-          %td{:align=>"center"}= link_to hr_candidate.author, url_for(params.merge(:author_id => hr_candidate.author.try(:id)))
+          %td{:align=>"center"}= link_to hr_candidate.author, params.merge(:author_id => hr_candidate.author.try(:id))
           %td{:align=>"center"}= format_date(hr_candidate.updated_on)
           %td{:align=>"center"}= format_date(hr_candidate.created_on)
           %td.buttons
