@@ -211,8 +211,10 @@ class HrCandidate < ActiveRecord::Base
   end
 
   def create_issues(hr_status_id)
-    HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
-      issue.create_issue(self)
+    Issue.transaction do
+      HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
+        issue.create_issue(self)
+      end
     end
   end
 end
