@@ -215,6 +215,16 @@ class HrCandidate < ActiveRecord::Base
       HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
         issue.create_issue(self)
       end
+    end.each do |issue|
+      begin
+        EstimatedTime.create(
+          :issue => issue,
+          :plan_on => issue.due_date,
+          :user => issue.author,
+          :comments => issue.subject,
+          :hours => issue.estimated_hours)
+      rescue
+      end
     end
   end
 end
