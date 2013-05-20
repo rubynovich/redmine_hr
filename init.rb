@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_hr do
   author 'Roman Shipiev'
   description 'Plugin automates the interview, hire and adaptation of new employees'
   version '0.2.4'
-  url 'https://github.com/rubynovich/redmine_hr'
+  url 'https://bitbucket.org/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'
 
   menu :application_menu, :hr_candidates,

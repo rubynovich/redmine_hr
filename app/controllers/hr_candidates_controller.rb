@@ -17,9 +17,9 @@ class HrCandidatesController < ApplicationController
     @limit = per_page_option
 
     scope = HrCandidate.
-      like_name(params[:name]).
-      like_field(params[:phone]).
-      like_field(params[:email]).
+      like_field(params[:name], :name).
+      like_field(params[:phone], :phone).
+      like_field(params[:email], :email).
       eql_field(params[:hr_job_id], :hr_job_id).
       eql_field(params[:hr_status_id], :hr_status_id).
       eql_field(params[:birth_date], :birth_date).
@@ -27,13 +27,10 @@ class HrCandidatesController < ApplicationController
       eql_field(params[:author_id], :author_id).
       period_time_period(params[:time_period])
 
-    @hr_candidate_count = scope.count
-    @hr_candidate_pages = Paginator.new self, @hr_candidate_count, @limit, params[:page]
-    @offset ||= @hr_candidate_pages.current.offset
-    @hr_candidates =  scope.find  :all,
-                                  :order => sort_clause,
-                                  :limit  =>  @limit,
-                                  :offset =>  @offset
+    @count = scope.count
+    @pages = Paginator.new @count, @limit, params[:page]
+    @offset ||= @pages.current.offset
+    @hr_candidates =  scope.find :all, :order => sort_clause, :limit  =>  @limit, :offset =>  @offset
   end
 
   # GET /hr_candidates/new

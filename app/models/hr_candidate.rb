@@ -22,19 +22,11 @@ class HrCandidate < ActiveRecord::Base
   before_create :add_author
 
   if Rails::VERSION::MAJOR >= 3
-    scope :like_name, lambda {|q|
-      if q.present?
+    scope :like_field, lambda {|q, field|
+      if q.present? && field.present?
         {:conditions =>
-          ["LOWER(name) LIKE :p OR name LIKE :p",
-          {:p => "%#{q.to_s.downcase}%"}]}
-      end
-    }
-
-    scope :like_field, lambda {|q|
-      if q.present?
-        {:conditions =>
-          ["phone LIKE :p",
-          {:p => "%#{q.to_s.downcase}%"}]}
+          ["LOWER(name) LIKE :p OR :field LIKE :p",
+          {:field => field, :p => "%#{q.to_s.downcase}%"}]}
       end
     }
 
@@ -78,19 +70,11 @@ class HrCandidate < ActiveRecord::Base
       end
     }
   else
-    named_scope :like_name, lambda {|q|
-      if q.present?
+    named_scope :like_field, lambda {|q, field|
+      if q.present? && field.present?
         {:conditions =>
-          ["LOWER(name) LIKE :p OR name LIKE :p",
-          {:p => "%#{q.to_s.downcase}%"}]}
-      end
-    }
-
-    named_scope :like_field, lambda {|q|
-      if q.present?
-        {:conditions =>
-          ["phone LIKE :p",
-          {:p => "%#{q.to_s.downcase}%"}]}
+          ["LOWER(name) LIKE :p OR :field LIKE :p",
+          {:field => field, :p => "%#{q.to_s.downcase}%"}]}
       end
     }
 
