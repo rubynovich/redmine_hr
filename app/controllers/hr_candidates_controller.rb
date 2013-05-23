@@ -28,7 +28,11 @@ class HrCandidatesController < ApplicationController
       period_time_period(params[:time_period])
 
     @count = scope.count
-    @pages = Paginator.new @count, @limit, params[:page]
+    @pages = begin
+      Paginator.new @count, @limit, params[:page]
+    rescue
+      Paginator.new self, @count, @limit, params[:page]
+    end
     @offset ||= @pages.current.offset
     @hr_candidates =  scope.find :all, :order => sort_clause, :limit  =>  @limit, :offset =>  @offset
   end
