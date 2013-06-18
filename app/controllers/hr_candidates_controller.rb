@@ -33,7 +33,11 @@ class HrCandidatesController < ApplicationController
     rescue
       Paginator.new self, @count, @limit, params[:page]
     end
-    @offset ||= @pages.current.offset
+    @offset ||= begin
+      @pages.current.offset
+    rescue
+      @pages.offset
+    end
     @hr_candidates =  scope.find :all, :order => sort_clause, :limit  =>  @limit, :offset =>  @offset
   end
 
