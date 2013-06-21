@@ -5,7 +5,11 @@ class HrJobsController < ApplicationController
   # GET /hr_jobs/
   def index
     @hr_job_pages, @hr_jobs = paginate :hr_jobs, :per_page => 25, :order => "name"
-    render :action => "index", :layout => false if request.xhr?
+
+    respond_to do |format|
+      format.html{ render :action => :index, :layout => !request.xhr? }
+      format.json{ render :json => HrJob.all(:order => :name) }
+    end
   end
 
   # GET /hr_jobs/new
