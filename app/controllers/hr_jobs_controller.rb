@@ -2,6 +2,8 @@ class HrJobsController < ApplicationController
   unloadable
   before_filter :require_hr
 
+  accept_api_auth :index
+
   # GET /hr_jobs/
   def index
     @hr_job_pages, @hr_jobs = paginate :hr_jobs, :per_page => 25, :order => "name"
