@@ -10,7 +10,13 @@ class HrJobsController < ApplicationController
 
     respond_to do |format|
       format.html{ render :action => :index, :layout => !request.xhr? }
-      format.json{ render :json => HrJob.all(:order => :name) }
+      format.json{
+        if params[:callback].present?
+          render :text => "#{params[:callback]}(#{HrJob.all(:order => :name).to_json})"
+        else
+          render :json => HrJob.all(:order => :name)
+        end
+      }
     end
   end
 
