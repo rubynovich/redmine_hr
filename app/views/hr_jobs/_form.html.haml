@@ -1,5 +1,5 @@
 = error_messages_for 'hr_job'
+= back_url_hidden_field_tag
 
 .box.tabular
-  = hidden_field_tag :back_url, params[:back_url]
   %p= f.text_field :name, :required => true

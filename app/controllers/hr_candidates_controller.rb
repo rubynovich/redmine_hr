@@ -9,6 +9,8 @@ class HrCandidatesController < ApplicationController
   helper :sort
   include SortHelper
 
+  accept_api_auth :create
+
   # GET /hr_candidates/
   def index
     sort_init 'due_date', 'desc'
