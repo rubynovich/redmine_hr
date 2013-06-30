@@ -60,6 +60,7 @@ class HrCandidatesController < ApplicationController
   # POST /hr_candidates
   def create
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
+    @hr_candidate.hr_status ||= HrStatus.default
     if request.post? && @hr_candidate.save
       render_attachment_warning_if_needed(@hr_candidate)
       flash[:notice] = l(:notice_successful_create)
