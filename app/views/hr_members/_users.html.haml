@@ -11,21 +11,23 @@
             %td.user
               = link_to_user member.user
             %td.buttons
-              = link_to l(:button_delete), hr_member_path(member), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+              = delete_link hr_member_path(member), :remote => true
   - else
     %p.nodata
       = l(:label_no_data)
 
 .splitcontentright
   #tab-content-users
-    - users = User.not_hr.all
-    - if users.any?
-      - form = form_for :hr_member, :html => {:class => :edit_group} do |f|
-        %fieldset
-          %legend
-            =l(:label_user_new)
-          #users
-            = principals_check_box_tags 'user_ids[]', users
+    = form_for :hr_member, :html => {:class => :edit_group, :method => :post}, :remote => true, :url => {:action => :create} do |f|
+      %fieldset
+        %legend
+          =l(:label_user_new)
 
-          %p= submit_tag l(:button_add)
-      = form if Rails::VERSION::MAJOR >= 3
+        = label_tag "user_search", l(:label_user_search)
+        = text_field_tag 'user_search', nil
+        = javascript_tag "observeSearchfield('user_search', null, '#{ escape_javascript autocomplete_for_user_hr_members_path }')"
+
+        #users
+          = render_principals_for_new_hr_members
+
+        %p= submit_tag l(:button_add)
