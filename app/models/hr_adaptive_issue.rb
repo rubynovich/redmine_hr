@@ -30,7 +30,7 @@ class HrAdaptiveIssue < ActiveRecord::Base
   end
 
   def create_issue(hr_candidate)
-    Issue.new(
+    Issue.create!(
       :status => IssueStatus.default,
       :tracker => self.tracker,
       :subject => [self.subject, hr_candidate.name].join(", "),

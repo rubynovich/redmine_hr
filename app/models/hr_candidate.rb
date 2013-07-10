@@ -195,11 +195,10 @@ class HrCandidate < ActiveRecord::Base
   end
 
   def create_issues(hr_status_id)
-#    Issue.transaction do
-    HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
-      issue.create_issue(self)
-    end.each do |issue|
-      raise issue.errors unless issue.save! #FIXME
+    Issue.transaction do
+      HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
+        issue.create_issue(self)
+      end
     end.each do |issue|
       begin
         EstimatedTime.create(
