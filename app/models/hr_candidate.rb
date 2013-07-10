@@ -198,6 +198,8 @@ class HrCandidate < ActiveRecord::Base
     Issue.transaction do
       HrAdaptiveIssue.on_status(hr_status_id).map do |issue|
         issue.create_issue(self)
+      end.each do |issue|
+        issue.save! #FIXME
       end
     end.each do |issue|
       begin
