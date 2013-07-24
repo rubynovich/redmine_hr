@@ -27,14 +27,14 @@ class HrCandidatesController < ApplicationController
       eql_field(params[:birth_date], :birth_date).
       eql_field(params[:due_date], :due_date).
       eql_field(params[:author_id], :author_id).
-      period_time_period(params[:time_period])
+      time_period('due_date', params[:time_period])
 
     @count = scope.count
     @pages = begin
-      Paginator.new @count, @limit, params[:page]
-    rescue
-      Paginator.new self, @count, @limit, params[:page]
-    end
+               Paginator.new @count, @limit, params[:page]
+             rescue
+               Paginator.new self, @count, @limit, params[:page]
+             end
     @offset ||= begin
       @pages.offset
     rescue

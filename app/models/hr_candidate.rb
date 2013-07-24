@@ -21,103 +21,23 @@ class HrCandidate < ActiveRecord::Base
   after_update :save_hr_change
   before_create :add_author
 
-  if Rails::VERSION::MAJOR >= 3
-    scope :like_field, lambda {|q, field|
-      if q.present? && field.present?
-        {:conditions =>
-          ["LOWER(name) LIKE :p OR :field LIKE :p",
-          {:field => field, :p => "%#{q.to_s.downcase}%"}]}
-      end
-    }
-
-    scope :eql_field, lambda {|q, field|
-      if q.present? && field.present?
-        where(field => q)
-      end
-    }
-
-    scope :period_time_period, lambda {|q|
-      today = Date.today
-      if q.present?
-        {:conditions =>
-          (case q
-            when "yesterday"
-              {:due_date => 1.day.ago}
-            when "today"
-              {:due_date => today}
-            when "tomorrow"
-              {:due_date => 1.day.from_now}
-            when "this_week"
-              ["due_date BETWEEN ? AND ?",
-                today,
-                1.week.from_now - today.wday.days]
-            when "next_week"
-              ["due_date BETWEEN ? AND ?",
-                1.week.from_now - today.wday.days,
-                2.week.from_now - today.wday.days]
-            when "this_month"
-              ["due_date BETWEEN ? AND ?",
-                today,
-                1.month.from_now - today.day.days]
-            when "next_month"
-              ["due_date BETWEEN ? AND ?",
-                1.month.from_now - today.day.days,
-                2.month.from_now - today.day.days]
-            else
-              {}
-          end)
-        }
-      end
-    }
-  else
-    named_scope :like_field, lambda {|q, field|
-      if q.present? && field.present?
-        {:conditions =>
-          ["LOWER(name) LIKE :p OR :field LIKE :p",
-          {:field => field, :p => "%#{q.to_s.downcase}%"}]}
-      end
-    }
-
-    named_scope :eql_field, lambda {|q, field|
-      if q.present? && field.present?
-        {:conditions => {field => q}}
-      end
-    }
-
-    named_scope :period_time_period, lambda {|q|
-      today = Date.today
-      if q.present?
-        {:conditions =>
-          (case q
-            when "yesterday"
-              {:due_date => 1.day.ago}
-            when "today"
-              {:due_date => today}
-            when "tomorrow"
-              {:due_date => 1.day.from_now}
-            when "this_week"
-              ["due_date BETWEEN ? AND ?",
-                today,
-                1.week.from_now - today.wday.days]
-            when "next_week"
-              ["due_date BETWEEN ? AND ?",
-                1.week.from_now - today.wday.days,
-                2.week.from_now - today.wday.days]
-            when "this_month"
-              ["due_date BETWEEN ? AND ?",
-                today,
-                1.month.from_now - today.day.days]
-            when "next_month"
-              ["due_date BETWEEN ? AND ?",
-                1.month.from_now - today.day.days,
-                2.month.from_now - today.day.days]
-            else
-              {}
-          end)
-        }
-      end
-    }
+  def self.time_periods
+   %w{any today yesterday last_week this_week last_month this_month last_year this_year}
   end
+
+  scope :like_field, lambda {|q, field|
+    if q.present? && field.present?
+      {:conditions =>
+        ["LOWER(name) LIKE :p OR :field LIKE :p",
+         {:field => field, :p => "%#{q.to_s.downcase}%"}]}
+    end
+  }
+
+  scope :eql_field, lambda {|q, field|
+    if q.present? && field.present?
+      where(field => q)
+    end
+  }
 
   def to_s
     name

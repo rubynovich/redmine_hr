@@ -29,21 +29,21 @@ Redmine::Plugin.register :redmine_hr do
     {:controller => :hr_members, :action => :index}, :caption => :label_hr_member_plural, :html => {:class => :users}
 end
 
-if Rails::VERSION::MAJOR < 3
-  require 'dispatcher'
-  object_to_prepare = Dispatcher
-else
-  object_to_prepare = Rails.configuration
-end
+Rails.configuration.to_prepare do
 
-object_to_prepare.to_prepare do
   [:user].each do |cl|
     require "hr_#{cl}_patch"
   end
 
+  require_dependency 'hr_candidate'
+  require 'time_period_scope'
+
   [
-    [User, HRPlugin::UserPatch]
+   [User, HRPlugin::UserPatch],
+   [HrCandidate, TimePeriodScope]
   ].each do |cl, patch|
     cl.send(:include, patch) unless cl.included_modules.include? patch
   end
+
 end
+

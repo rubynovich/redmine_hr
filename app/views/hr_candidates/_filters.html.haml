@@ -46,13 +46,13 @@
     %br
 
     %label=l(:field_due_date) + ":"
-    - %w{all yesterday today tomorrow this_week next_week this_month next_month}.each do |key|
+    - HrCandidate.time_periods.each do |key|
       - if params[:time_period] == key
         %strong
-          = l(:"label_#{key}")
+          = l(:"label_hr_period_#{key}")
       - else
-        = link_to l(:"label_#{key}"), params.merge( :time_period => key )
-      = "(#{HrCandidate.period_time_period(key).count}) /"
+        = link_to l(:"label_hr_period_#{key}"), params.merge( :time_period => key )
+      = "(#{HrCandidate.time_period(key, 'due_date').count}) /"
 
     %br
 

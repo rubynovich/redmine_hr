@@ -62,3 +62,13 @@ en:
           attributes:
             due_date:
               greated_then_now: "must be greated then now"
+
+  label_period_any: any
+  label_period_today: today
+  label_period_yesterday: yesterday
+  label_period_last_week: last week
+  label_period_this_week: this week
+  label_period_last_month: last month
+  label_period_this_month: this month
+  label_period_last_year: last year
+  label_period_this_year: this year
