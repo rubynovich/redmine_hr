@@ -21,10 +21,6 @@ class HrCandidate < ActiveRecord::Base
   after_update :save_hr_change
   before_create :add_author
 
-  def self.time_periods
-   %w{any today yesterday last_week this_week last_month this_month last_year this_year}
-  end
-
   scope :like_field, lambda {|q, field|
     if q.present? && field.present?
       {:conditions =>

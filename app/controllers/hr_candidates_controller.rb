@@ -27,7 +27,7 @@ class HrCandidatesController < ApplicationController
       eql_field(params[:birth_date], :birth_date).
       eql_field(params[:due_date], :due_date).
       eql_field(params[:author_id], :author_id).
-      time_period('due_date', params[:time_period])
+      time_period(params[:time_period], 'due_date')
 
     @count = scope.count
     @pages = begin
