@@ -23,7 +23,7 @@ class HrCandidate < ActiveRecord::Base
 
   scope :like_field, lambda {|q, field|
     if q.present? && field.present?
-      where("LOWER(#{field}) LIKE ?", "%#{q.to_s.downcase}%")
+      where("LOWER(#{field}) LIKE LOWER(?)", "%#{q.to_s.downcase}%")
     end
   }
 
