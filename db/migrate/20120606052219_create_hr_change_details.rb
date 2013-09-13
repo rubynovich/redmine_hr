@@ -4,8 +4,8 @@ class CreateHrChangeDetails < ActiveRecord::Migration
       t.column :hr_change_id, :integer, :null => false
       t.column :property, :string, :limit => 30, :default => "attr", :null => false
       t.column :prop_key, :string, :limit => 30, :null => false
-      t.column :old_value, :text, :null => false      
-      t.column :value, :text, :null => false
+      t.column :old_value, :text#, :null => false
+      t.column :value, :text#, :null => false
     end
   end
 
