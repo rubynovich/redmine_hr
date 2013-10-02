@@ -12,19 +12,19 @@ Redmine::Plugin.register :redmine_hr do
     {:controller => :hr_candidates, :action => :index},
     :caption => :label_hr_candidate_plural,
     :if => Proc.new{ User.current.is_hr? }
-  menu :application_menu, :hr_statuses,
-    {:controller => :hr_statuses, :action => :index},
-    :caption => :label_hr_status_plural,
-    :if => Proc.new{ User.current.is_hr? }
-  menu :application_menu, :hr_jobs,
-    {:controller => :hr_jobs, :action => :index},
-    :caption => :label_hr_job_plural,
-    :if => Proc.new{ User.current.is_hr? }
-  menu :application_menu, :hr_adaptive_issues,
+#  menu :application_menu, :hr_statuses,
+#    {:controller => :hr_statuses, :action => :index},
+#    :caption => :label_hr_status_plural,
+#    :if => Proc.new{ User.current.is_hr? }
+#  menu :application_menu, :hr_jobs,
+#    {:controller => :hr_jobs, :action => :index},
+#    :caption => :label_hr_job_plural,
+#    :if => Proc.new{ User.current.is_hr? }
+
+  menu :admin_menu, :hr_adaptive_issues,
     {:controller => :hr_adaptive_issues, :action => :index},
     :caption => :label_hr_adaptive_issue_plural,
     :if => Proc.new{ User.current.is_hr? }
-
   menu :admin_menu, :hr_members,
     {:controller => :hr_members, :action => :index}, :caption => :label_hr_member_plural, :html => {:class => :users}
 end
@@ -46,4 +46,3 @@ Rails.configuration.to_prepare do
   end
 
 end
-

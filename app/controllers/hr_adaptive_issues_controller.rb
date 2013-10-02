@@ -1,6 +1,8 @@
 class HrAdaptiveIssuesController < ApplicationController
   unloadable
-  before_filter :require_hr
+  layout 'admin'
+
+  before_filter :require_admin
   before_filter :find_adaptive_issue, :only => [:edit, :show, :destroy, :update]
   before_filter :new_adaptive_issue, :only => [:new, :create]
 
