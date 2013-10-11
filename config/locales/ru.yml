@@ -1,5 +1,8 @@
 # Russian strings go here for Rails i18n
 ru:
+
+  label_hr_menu: HR
+
   label_hr_member_plural: "HR-менеджеры"
 
   label_hr_status: "Статус рассмотрения"
@@ -73,3 +76,5 @@ ru:
   label_hr_period_this_month: этот месяц
   label_hr_period_last_year: прошлый год
   label_hr_period_this_year: этот год
+
+  hr: HR
