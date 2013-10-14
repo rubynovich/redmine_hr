@@ -4,8 +4,8 @@ class HrAdaptiveIssue < ActiveRecord::Base
   belongs_to :project
   belongs_to :tracker
   belongs_to :hr_status
-  belongs_to :assigned_to, :class_name => 'Principal', :foreign_key => 'assigned_to_id'
-  belongs_to :priority, :class_name => 'IssuePriority', :foreign_key => 'priority_id'
+  belongs_to :assigned_to, class_name: 'Principal', foreign_key: 'assigned_to_id'
+  belongs_to :priority, class_name: 'IssuePriority', foreign_key: 'priority_id'
 
   validates_presence_of :project_id, :tracker_id, :assigned_to_id,
     :priority_id, :subject, :start_date, :due_date, :hr_status_id
