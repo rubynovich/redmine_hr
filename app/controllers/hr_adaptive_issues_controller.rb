@@ -3,28 +3,19 @@ class HrAdaptiveIssuesController < ApplicationController
   layout 'admin'
 
   before_filter :require_admin
-  before_filter :find_adaptive_issue, :only => [:edit, :show, :destroy, :update]
-  before_filter :new_adaptive_issue, :only => [:new, :create]
+  before_filter :find_adaptive_issue, only: [:edit, :show, :destroy, :update]
+  before_filter :new_adaptive_issue, only: [:new, :create]
 
   def index
-    @hr_adaptive_issues = HrAdaptiveIssue.all(:order => 'hr_status_id, subject')
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
-  def show
+    @hr_adaptive_issues = HrAdaptiveIssue.order([:hr_status_id, :subject])
   end
 
   def create
     if @hr_adaptive_issue.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => 'index'
+      redirect_to action: 'index'
     else
-      render :action => :new
+      render action: 'new'
     end
   end
 
@@ -33,16 +24,16 @@ class HrAdaptiveIssuesController < ApplicationController
       flash[:notice] = l(:notice_successful_update)
       redirect_to(hr_adaptive_issue_path(@hr_adaptive_issue))
     else
-      render :action => "edit"
+      render action: 'edit'
     end
   end
 
   def destroy
     @hr_adaptive_issue.destroy
-    redirect_to :action => 'index'
+    redirect_to action: 'index'
   rescue
     flash[:error] = l(:error_unable_delete_hr_adaptive_issue)
-    redirect_to :action => 'index'
+    redirect_to action: 'index'
   end
 
 
