@@ -11,17 +11,10 @@ Redmine::Plugin.register :redmine_hr do
 
   Redmine::MenuManager.map :top_menu do |menu| 
 
-    unless menu.exists?(:hr)
-      menu.push(:hr, "#", 
-                { :after => :projects,
-                  :parent => :top_menu, 
-                  :caption => :label_hr_menu
-                })
-    end
-
+    parent = menu.exists?(:hr) ? :hr : :top_menu
     menu.push(:hr_candidates, 
               {:controller => :hr_candidates, :action => :index}, 
-              { :parent => :hr,     
+              { :parent => parent,     
                 :caption => :label_hr_candidate_plural,
                 :if => Proc.new{ User.current.is_hr? }
               })  
@@ -31,7 +24,7 @@ Redmine::Plugin.register :redmine_hr do
   menu :admin_menu, :hr_adaptive_issues,
     {:controller => :hr_adaptive_issues, :action => :index},
     :caption => :label_hr_adaptive_issue_plural,
-    #:if => Proc.new{ User.current.is_hr? },
+    :if => Proc.new{ User.current.is_hr? },
     :html => {:class => :enumerations}
 
   menu :admin_menu, :hr_members,

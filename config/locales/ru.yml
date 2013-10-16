@@ -1,8 +1,5 @@
 # Russian strings go here for Rails i18n
 ru:
-
-  label_hr_menu: HR
-
   label_hr_member_plural: "HR-менеджеры"
 
   label_hr_status: "Статус рассмотрения"
