@@ -8,26 +8,30 @@ Redmine::Plugin.register :redmine_hr do
   url 'https://bitbucket.org/rubynovich/redmine_hr'
   author_url 'http://roman.shipiev.me'
 
-  menu :application_menu, :hr_candidates,
-    {:controller => :hr_candidates, :action => :index},
-    :caption => :label_hr_candidate_plural,
-    :if => Proc.new{ User.current.is_hr? }
-#  menu :application_menu, :hr_statuses,
-#    {:controller => :hr_statuses, :action => :index},
-#    :caption => :label_hr_status_plural,
-#    :if => Proc.new{ User.current.is_hr? }
-#  menu :application_menu, :hr_jobs,
-#    {:controller => :hr_jobs, :action => :index},
-#    :caption => :label_hr_job_plural,
-#    :if => Proc.new{ User.current.is_hr? }
+
+  Redmine::MenuManager.map :top_menu do |menu| 
+
+    parent = menu.exists?(:hr) ? :hr : :top_menu
+    menu.push(:hr_candidates, 
+              {:controller => :hr_candidates, :action => :index}, 
+              { :parent => parent,     
+                :caption => :label_hr_candidate_plural,
+                :if => Proc.new{ User.current.is_hr? }
+              })  
+
+  end
 
   menu :admin_menu, :hr_adaptive_issues,
     {:controller => :hr_adaptive_issues, :action => :index},
     :caption => :label_hr_adaptive_issue_plural,
-    #:if => Proc.new{ User.current.is_hr? },
+    :if => Proc.new{ User.current.is_hr? },
     :html => {:class => :enumerations}
+
   menu :admin_menu, :hr_members,
-    {:controller => :hr_members, :action => :index}, :caption => :label_hr_member_plural, :html => {:class => :users}
+    {:controller => :hr_members, :action => :index}, 
+    :caption => :label_hr_member_plural, 
+    :html => {:class => :users}
+
 end
 
 Rails.configuration.to_prepare do
