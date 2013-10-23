@@ -61,7 +61,7 @@ ru:
         hr_candidate:
           attributes:
             due_date:
-              greated_then_now: "должна быть позже настоящего времени"  
+              greated_then_now: "должна быть позже настоящего времени"
 
 
   label_hr_period_any: любая
@@ -75,3 +75,4 @@ ru:
   label_hr_period_this_year: этот год
 
   hr: HR
+  prompt_author_issue: "<<автор задачи>>"

@@ -16,7 +16,7 @@
       = link_to l(:label_hr_status_new), {controller: 'hr_statuses', action: 'new', back_url: url_for(params)}, class: 'icon icon-add'
 
     %p= f.select :due_date, HrAdaptiveIssue.due_date_variants.map{|s| [t(s, scope: 'list_adaptive_issue_date_variants'), s]}, required: true, size: 10
-    %p= f.select :assigned_to_id, principals_options_for_select(Principal.active.sorted, @hr_adaptive_issue.assigned_to), required: true, size: 10, include_blank: t(:prompt_please_select)
+    %p= f.select :assigned_to_id, principals_options_for_select(Principal.active.sorted, @hr_adaptive_issue.assigned_to), required: true, size: 10, include_blank: t(:prompt_author_issue)
 
   -#%div{:style=>"clear:both"}
   %p= f.text_area :description, cols: 60, rows: 15, class: 'wiki-edit'
