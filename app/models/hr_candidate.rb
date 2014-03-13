@@ -10,7 +10,8 @@ class HrCandidate < ActiveRecord::Base
   validates_format_of :due_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2})$/
   validates_format_of :birth_date, :with => /^(19\d{2}-\d{2}-\d{2}|20\d{2}-\d{2}-\d{2}|)$/
 #  validate :validate_due_date, :unless => "hr_status.is_closed?"
-
+  validates_format_of :email, :with => /^[0-9a-zA-Z][0-9a-zA-Z\-\_]*(\.[0-9a-zA-Z\-\_]*[0-9a-zA-Z]+)*@[0-9a-zA-Z][0-9a-zA-Z\-\_]*(\.[0-9a-zA-Z\-\_]*[0-9a-zA-Z]+)*\.[a-zA-Z]{2,}$/i
+  
   attr_accessor :project
 
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
