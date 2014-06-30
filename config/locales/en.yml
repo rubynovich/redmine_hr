@@ -72,3 +72,15 @@ en:
   label_period_this_month: this month
   label_period_last_year: last year
   label_period_this_year: this year
+
+  label_add_phone: Add phone
+  field_hr_phone_correct: Enter phone number in accordance with the pattern +7 (XXX) XXX-XX-XX
+
+  activerecord:
+    errors:
+      models:
+        hr_candidate:
+          attributes:
+            phone:
+              label_phones_errors: ': format error, enter with the pattern +7 (XXX) XXX-XX-XX'
+

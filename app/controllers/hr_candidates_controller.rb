@@ -2,7 +2,7 @@ class HrCandidatesController < ApplicationController
   unloadable
   before_filter :require_hr
   before_filter :find_hr_candidate, :only => [:edit, :update, :show, :destroy]
-  before_filter :new_hr_candidate, :only => [:new, :create]
+  before_filter :new_hr_candidate, :only => [:new]#, :create]
 
   helper :attachments
   include AttachmentsHelper
@@ -59,6 +59,17 @@ class HrCandidatesController < ApplicationController
 
   # POST /hr_candidates
   def create
+    params[:hr_candidate][:phone] = ""
+    params[:hr_candidate][:phone_counter].to_i.times do |i|
+      params[:hr_candidate][:phone] << ", " if (i > 0) && !params["phone"+i.to_s].blank?
+      params[:hr_candidate][:phone] << params["phone"+i.to_s] unless params["phone"+i.to_s].blank?
+      params.delete(params["phone"+i.to_s])
+    end
+    params[:hr_candidate].delete(:phone_counter)
+    Rails.logger.error("create".red)
+
+    new_hr_candidate
+    
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
     @hr_candidate.hr_status ||= HrStatus.default
     if request.post? && @hr_candidate.save
@@ -72,6 +83,15 @@ class HrCandidatesController < ApplicationController
 
   # PUT /hr_candidates/1
   def update
+    params[:hr_candidate][:phone] = ""
+    params[:hr_candidate][:phone_counter].to_i.times do |i|
+      params[:hr_candidate][:phone] << ", " if (i > 0) && !params["phone"+i.to_s].blank?
+      params[:hr_candidate][:phone] << params["phone"+i.to_s] unless params["phone"+i.to_s].blank?
+      params.delete(params["phone"+i.to_s])
+    end
+    params[:hr_candidate].delete(:phone_counter)
+    Rails.logger.error("create".red)
+
     @hr_candidate.init_hr_change(params[:notes])
     @hr_candidate.save_attachments(params[:attachments] || (params[:hr_candidate] && params[:hr_candidate][:uploads]))
     if @hr_candidate.update_attributes(params[:hr_candidate])
