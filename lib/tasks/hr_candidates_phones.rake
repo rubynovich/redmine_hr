@@ -3,43 +3,6 @@ namespace :redmine do
   namespace :plugins do
     namespace :hr_candidates do
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         def update_one_phone(hr, some_phones)
             unless some_phones.blank?
                 some_phones.sub!(/;\s+/, ", ")
@@ -96,9 +59,7 @@ namespace :redmine do
         task :hr_candidates_update_phone => :environment do
             HrCandidate.all.each do |c|
                 next if c.phone.blank? 
-                #next if (c.id != 1681) && (c.id != 1834) && (c.id != 1969) && (c.id != 2206)
                 phonee = c.phone.dup
-                #puts c.id.to_s+ "  phones:     _" + (c.phone.blank? ? "" : c.phone) 
                 update_one_phone(c, c.phone)
                 c.phone = concat_duplicates(c.phone)
 
@@ -109,12 +70,21 @@ namespace :redmine do
                 end
 
                 #puts "---------------------------------" 
-                #break
                 
             end
             HrCandidate.where("(LENGTH(phone) < 5) AND (LENGTH(phone) > 0)").update_all(phone: nil)
         end
 
+        desc 'Set sanitized_phones from phones'
+        # rake redmine:plugins:hr_candidates:hr_candidates_sanitized_phones            
+        task :hr_candidates_sanitized_phones => :environment do
+            HrCandidate.all.each do |c|
+                next if c.phone.blank?      
+                c.sanitized_phones = c.phone.gsub(/[^0-9,]/, '')
+                c.update_column(:sanitized_phones, c.sanitized_phones)                           
+                puts c.id.to_s+ "  phones: _" + c.phone + "_    _" + c.sanitized_phones + "_    "
+            end
+        end
     end
   end
 end

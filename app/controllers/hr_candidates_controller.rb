@@ -20,7 +20,7 @@ class HrCandidatesController < ApplicationController
 
     scope = HrCandidate.
       like_field(params[:name], :name).
-      like_field(params[:phone], :phone).
+      like_field(params[:phone], :sanitized_phones).
       like_field(params[:email], :email).
       eql_field(params[:hr_job_id], :hr_job_id).
       eql_field(params[:hr_status_id], :hr_status_id).
