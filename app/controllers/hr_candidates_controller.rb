@@ -65,6 +65,7 @@ class HrCandidatesController < ApplicationController
       params[:hr_candidate][:phone] << params["phone"+i.to_s] unless params["phone"+i.to_s].blank?
       params.delete(params["phone"+i.to_s])
     end
+    params[:hr_candidate][:sanitized_phones] = params[:hr_candidate][:phone].gsub(/[^0-9,]/, '')
     params[:hr_candidate].delete(:phone_counter)
     Rails.logger.error("create".red)
 
@@ -89,6 +90,7 @@ class HrCandidatesController < ApplicationController
       params[:hr_candidate][:phone] << params["phone"+i.to_s] unless params["phone"+i.to_s].blank?
       params.delete(params["phone"+i.to_s])
     end
+    params[:hr_candidate][:sanitized_phones] = params[:hr_candidate][:phone].gsub(/[^0-9,]/, '')
     params[:hr_candidate].delete(:phone_counter)
     Rails.logger.error("create".red)
 
