@@ -1,3 +1,14 @@
+:javascript
+  function checkIt(evt) {
+    evt = (evt) ? evt : window.event
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    //alert(charCode);
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false
+    }
+    return true
+  }
+
 %fieldset
   %legend= l(:label_filter_plural)
 
@@ -30,6 +41,8 @@
             = hr_status.name
             = "(#{hr_status.hr_candidates.count})"
 
+    %br
+
     %label{:for=>'author_id'}= l(:field_author) + ":"
     %select{:id => 'author_id', :name => 'author_id', :class => "small", :onchange => "this.form.submit(); return false;"}
       %option
@@ -61,7 +74,7 @@
     = text_field_tag 'name', params[:name], :size => 30
 
     %label{:for=>'phone'}= l(:field_phone) + ":"
-    = text_field_tag 'phone', params[:phone], :size => 10
+    = text_field_tag 'phone', params[:phone], :size => 10, :onKeyPress=>"return checkIt(event)"
 
     %label{:for=>'email'}= l(:field_email) + ":"
     = text_field_tag 'email', params[:email], :size => 10

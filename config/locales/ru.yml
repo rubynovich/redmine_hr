@@ -78,3 +78,13 @@ ru:
 
   hr: HR
   prompt_author_issue: "<<автор задачи>>"
+  label_add_phone: Добавить телефон
+  field_hr_phone_correct: Введите номер телефона в соответствии с шаблоном +7 (XXX) XXX-XX-XX
+  
+  activerecord:
+    errors:
+      models:
+        hr_candidate:
+          attributes:
+            phone:
+              label_phones_errors: ':  ошибка в формате телефона, введите по образцу +7 (XXX) XXX-XX-XX'
