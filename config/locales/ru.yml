@@ -43,6 +43,8 @@ ru:
   error_unable_delete_hr_status: "Удаление статуса рассмотрения невозможно"
   error_unable_delete_hr_adaptive_issue: "Удаление адаптационной задачи невозможно"
 
+  hr_status_undefined: "Статус неопределен"
+
   message_incorrect_format_phone: "задан неверно. Он должен состоять только из 10 цифр"
   message_about_hr_candidate: "Новый сотрудник %{name} (%{job}) приступает к работе %{fwd}"
   list_adaptive_issue_date_variants:
