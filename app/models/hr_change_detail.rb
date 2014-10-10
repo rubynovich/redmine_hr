@@ -34,4 +34,3 @@ class HrChangeDetail < ActiveRecord::Base
 
 end
 
-menu :project_menu, :ext_gantt, { :controller => :ext_gantt, :action => :show }, :caption => :ext_gantt, :after => :new_issue, :html => {:target => "_blank#{:params => :id}" }
