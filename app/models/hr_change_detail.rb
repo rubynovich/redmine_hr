@@ -11,7 +11,7 @@ class HrChangeDetail < ActiveRecord::Base
   def create_issues
     if (prop_key == "hr_status_id")&&(HrAdaptiveIssue.on_status(value).first)
       self.hr_change.notes += "\n\n" + self.hr_change.hr_candidate.create_issues(value).map{|i| 
-        "##{i.id || "[ошибка]"} #{i.subject} #{'(' + i.errors.full_messages.join(' ')  + ')' unless i.id  }"
+        "#{ i.id ? '#'+i.id.to_s : "[ошибка]"} #{i.subject} #{'(' + i.errors.full_messages.join(' ')  + ')' unless i.id  }"
       }.join("\n")
       self.hr_change.save
     end
