@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class HrChangeDetail < ActiveRecord::Base
   unloadable
 
@@ -9,8 +10,8 @@ class HrChangeDetail < ActiveRecord::Base
 
   def create_issues
     if (prop_key == "hr_status_id")&&(HrAdaptiveIssue.on_status(value).first)
-      self.hr_change.notes += "\n\n" + self.hr_change.hr_candidate.create_issues(value).map{ 
-        |i| "##{i.id} - #{i.subject}"
+      self.hr_change.notes += "\n\n" + self.hr_change.hr_candidate.create_issues(value).map{|i| 
+        "##{i.id || "[ошибка]"} #{i.subject} #{'(' + i.errors.full_messages.join(' ')  + ')' unless i.id  }"
       }.join("\n")
       self.hr_change.save
     end
@@ -32,3 +33,5 @@ class HrChangeDetail < ActiveRecord::Base
   end
 
 end
+
+menu :project_menu, :ext_gantt, { :controller => :ext_gantt, :action => :show }, :caption => :ext_gantt, :after => :new_issue, :html => {:target => "_blank#{:params => :id}" }
